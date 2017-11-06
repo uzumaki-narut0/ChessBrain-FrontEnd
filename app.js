@@ -108,8 +108,9 @@ app.post('/handleSignin',function(req,res){
 			//login successful
 			//redirect to home page
 			console.log(userDetails);
-			var x = Stats.find({username:req.body.username}, function(err, userGameDetails){
-				res.render("home",{userDetails : userDetails[0]}, userGameDetails :userGameDetails[0]);
+			var x = Stats.find({username:req.body.username}, function(err, userGameDetails)
+			{
+				res.render("home",{userDetails : userDetails[0], userGameDetails :userGameDetails[0]});
 			});
 		}
 	});
