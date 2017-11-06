@@ -20,10 +20,17 @@
 		<div class="row" style="height: 100%">
 			<div style="background-color: rgba(40, 50, 78);height: 100%;" class="col-md-1">
 				<ul id="sidebar-ul">
-					<li id="sidebar-li-app" class="sidebar-li">CB</li>
-					<li class="sidebar-li"><i style="color:rgba(255,255,255,0.85);" class="fa fa-home fa-2x" aria-hidden="true"></i></li>
-					<li class="sidebar-li"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
-					<li class="sidebar-li"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></li>
+					<li id="sidebar-li-app" class="sidebar-li">
+					<img src="https://lichess1.org/assets/images/learn/brutal-helm.svg">
+					CB
+					</li>
+					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
+						Castle
+					</li>
+					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Play
+					</li>
+					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/rally-the-troops.svg">Milestones</li>
+					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
 				</ul>
 			</div>
 			<div id="chessboard-div" class="col-md-7">
@@ -34,11 +41,23 @@
 					</div>
 					<div id="timer" class="col-md-3">
 						<ul>
-							<li>Magnus</li>
 							<li>
-								<img src="img/clock.png" height="128px" width="128px"/>
+
+								Magnus
+								<span class="label label-info">05:00</span>
+							</li>
+							<li style="padding-bottom: 10px">
+								<span class="label label-warning">Offer Draw</span><br>
+								<!-- <img src="img/clock.png" height="128px" width="128px"/> -->
+								<!-- <img height="128px" width="128px" src="https://lichess1.org/assets/images/learn/spinning-blades.svg"> -->
  							</li>
-							<li style="padding-bottom: 0">Swapnil</li>
+ 							<li>
+								<span class="label label-danger">Resign</span><br>
+							</li>
+							<li style="padding-bottom: 0">
+								<span class="label label-info">04:59</span><br>
+							Swapnil
+							</li>
 						</ul>
 					</div>
 				</div>
