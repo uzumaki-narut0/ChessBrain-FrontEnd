@@ -3,7 +3,14 @@ html, body, .container-fluid, #chessWrapper, .row {
 	/*overflow: visible;*/
 }
 #chessboard-div{
-    background-color: #00A876;
+    /*background-color: #00A876;*/
+    background: -webkit-linear-gradient(right, rgba(40, 50, 78, 0.7), rgba(40, 50, 78, 0.9));
+  background: -moz-linear-gradient(right, rgba(40, 50, 78, 0.7), rgba(40, 50, 78, 0.9));
+  background: -o-linear-gradient(right, rgba(40, 50, 78, 0.7), rgba(40, 50, 78, 0.9));
+  background: linear-gradient(to left, rgba(40, 50, 78, 0.7), rgba(40, 50, 78, 0.9));
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; 
     height: 100%;
     padding: 0;
 }

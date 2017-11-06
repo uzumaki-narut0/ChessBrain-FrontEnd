@@ -9,8 +9,7 @@ chess engine for a solo play and will also support multiplayer.
 
 ## Work done so far
 
-1. We have utilized the concepts of web scraping and used python (BeautifulSoup) to generate datasets by
-scraping the chessboard images from chess.com, lichess.com and some other websites. To dissect a complete chessboard into individual chess pieces, we have used python imaging library PIL.
+1. We have utilized the concepts of web scraping and used python (BeautifulSoup) to generate datasets by scraping the chessboard images from chess.com, lichess.com and some other websites. To dissect a complete chessboard into individual chess pieces, we have used python imaging library PIL.
 
 2. We made use of tensorflow and the concept of hough transform to identify chessboard in any
 image. Since we are only considering digital images of chessboard from any particular website, we

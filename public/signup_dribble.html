@@ -126,14 +126,16 @@
 				<h2>
 					Or login to your account
 				</h1>
-				<div id="sign-up-form">
-					<input type="text" placeholder="Email Id">
-					<span class="divider"></span>
-					<input type="Password" placeholder="Password">
-					<span class="divider"></span>
-				
-					<input id="loginbutton" class="btn" type="button" value="Login">
-				</div>
+                <form method="post" action="http://localhost/hope/index.php">
+    				<div id="sign-up-form">
+    					<input name="email" type="text" placeholder="Email Id">
+    					<span class="divider"></span>
+    					<input name="password" type="Password" placeholder="Password">
+    					<span class="divider"></span>
+    				
+    					<input type="submit" id="loginbutton" class="btn" type="button" value="Login">
+    				</div>
+                </form>
 
 			</div>
 		</div>
