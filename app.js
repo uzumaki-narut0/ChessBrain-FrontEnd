@@ -99,7 +99,7 @@ app.post('/handleSignin',function(req,res){
 			//login successful
 			//redirect to home page
 			console.log(userDetails);
-			res.render("/home");
+			res.render("home");
 		}
 	});
   //res.status(200).send(html);
