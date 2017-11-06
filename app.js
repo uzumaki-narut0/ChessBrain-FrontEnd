@@ -36,6 +36,7 @@ var loginSchemaObj = new loginSchema({
 
 var statsSchemaObj = new statsSchema({
 	username : { type: String, required: true, unique: true },
+	totalGames : Number,
 	wins : Number,
 	losses : Number,
 	draws : Number
@@ -81,11 +82,20 @@ app.post('/handleSignup',function(req,res){
   		//signup successfull
   		//redirect to home page
   		// console.log()
-  		res.render('home');
+  		var gameStats = new Stats({
+  			username : req.body.username,
+  			totalGames : 0,
+  			wins : 0,
+  			losses : 0,
+  			draws : 0
+  		});
+  		gameStats.save(function(err{
+
+  		}));
+  		console.log(gameStats);
+  		res.render('home',{userDetails : req.body, userGameDetais : gameStats});
   	}
   });
-  
-  //res.status(200).send(html);
 })
 
 app.post('/handleSignin',function(req,res){
