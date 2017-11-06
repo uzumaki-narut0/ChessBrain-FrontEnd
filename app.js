@@ -59,7 +59,7 @@ app.get('/home',function(req,res){
 })
 
 app.get('/handleSignup',function(req,res){
-  // console.log(req.params);
+  console.log(req.body);
   var result = new User(req.body);
   result.save(function(err){
   	if(err)
@@ -72,6 +72,7 @@ app.get('/handleSignup',function(req,res){
   	{
   		//signup successfull
   		//redirect to home page
+  		// console.log()
   		res.render('/home');
   	}
   });
