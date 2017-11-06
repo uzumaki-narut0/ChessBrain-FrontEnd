@@ -58,7 +58,7 @@ app.get('/home',function(req,res){
   //res.status(200).send(html);
 })
 
-app.get('/handleSignup',function(req,res){
+app.post('/handleSignup',function(req,res){
   console.log(req.body);
   var result = new User(req.body);
   result.save(function(err){
