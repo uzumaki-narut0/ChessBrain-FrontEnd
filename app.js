@@ -18,16 +18,23 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 
-var Schema = mongoose.Schema;
+var signupSchema = mongoose.Schema;
+var loginSchema = mongoose.Schema;
 var statsSchema = mongoose.Schema;
 
-var userSchema = new Schema({
+var signupSchemaObj = new signupSchema({
 	username: { type: String, required: true, unique: true },
   	userpassword: { type: String, required: true },
     usermail    		: String
 });
 
-var userStatsSchema = new Schema({
+var loginSchemaObj = new loginSchema({
+	username: { type: String, required: true, unique: true },
+  	userpassword: { type: String, required: true }
+
+});
+
+var statsSchemaObj = new statsSchema({
 	username : { type: String, required: true, unique: true },
 	wins : Number,
 	losses : Number,
@@ -36,8 +43,9 @@ var userStatsSchema = new Schema({
 });
 
 //creating models
-var User = mongoose.model('User', userSchema);
-var userStats = mongoose.model('userStats', userStatsSchema);
+var Signup = mongoose.model('User', signupSchemaObj);
+var Stats = mongoose.model('userStats', statsSchemaObj);
+var Login = mongoose.model('Login', loginSchemaObj);
 
 //establishing connection
 mongoose.connect(process.env.MONGODB_URI, function (error) {
@@ -59,7 +67,7 @@ app.get('/home',function(req,res){
 
 app.post('/handleSignup',function(req,res){
   console.log(req.body);
-  var result = new User(req.body);
+  var result = new Signup(req.body);
   result.save(function(err){
   	if(err)
   	{
@@ -81,15 +89,16 @@ app.post('/handleSignup',function(req,res){
 })
 
 app.post('/handleSignin',function(req,res){
-	User.find(function(err, signInDetails){
+	Signup.find(req.body, function(err, userDetails){
 		if(err){
 			//login unsuccessfull
 			//redirect to same page
-			res.redirect("/new_signup");
+			res.redirect("/authenticateUser.html");
 		}	
 		else{
 			//login successful
 			//redirect to home page
+			console.log(userDetails);
 			res.render("/home");
 		}
 	});
