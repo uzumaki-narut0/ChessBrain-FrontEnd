@@ -1,0 +1,126 @@
+<div class="container-fluid">
+	<div class="row" style="height: 100%">
+		<div style="background-color: rgba(40, 50, 78);height: 100%;" class="col-md-1">
+			<ul id="sidebar-ul">
+				<li id="sidebar-li-app" class="sidebar-li">
+				<img src="https://lichess1.org/assets/images/learn/brutal-helm.svg">
+				CB
+				</li>
+				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
+					Castle
+				</li>
+				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Play
+				</li>
+				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/rally-the-troops.svg">Milestones</li>
+				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
+			</ul>
+		</div>
+		<div id="chessboard-div" class="col-md-7">
+			<div style="height: 100%" class="row">
+				<div class="col-md-9">
+					<div id="board1">
+            		</div>
+				</div>
+				<div id="timer" class="col-md-3">
+					<ul>
+						<li>
+
+							Magnus<br>
+							<span class="label label-info">
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+								05:00
+							</span>
+						</li>
+						<li style="padding-bottom: 10px">
+							<span class="label label-warning">
+							<i class="fa fa-handshake-o" aria-hidden="true"></i>
+							Offer Draw
+							</span><br>
+							<!-- <img src="img/clock.png" height="128px" width="128px"/> -->
+							<!-- <img height="128px" width="128px" src="https://lichess1.org/assets/images/learn/spinning-blades.svg"> -->
+							</li>
+							<li>
+							<span class="label label-danger">
+							<i class="fa fa-ravelry" aria-hidden="true"></i>
+							Resign
+							</span><br>
+						</li>
+						<li style="padding-bottom: 0">
+							<span class="label label-info">
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+								04:59
+							</span><br>
+						Swapnil
+						</li>
+					</ul>
+				</div>
+			</div>
+            
+		</div>
+		<div id="chessWrapper" class="col-md-4">
+			<div id="profile-header" class="row">
+		<!-- 	<div class="col-md-1">
+			</div> -->
+
+			<div id="heading" class="col-md-12">
+				<i  class="fa fa-toggle-off fa" aria-hidden="true"></i>
+				PROFILE
+			</div>
+		</div>
+
+		<div id="profile-info" class="row">
+			<div class="col-md-12">
+				<div id="profile-info-overlay" class="row">
+					<div class="col-md-12">
+						<div id="profile-pic-wrapper" class="row">
+							<div class="col-md-12">
+								<img id="user-pic" class="img-circle" src="img/crown(2).png">
+							</div>
+						</div>
+						<div id="user-name-wrapper" class="row">
+							<div class="col-md-12">
+								<span id="user-name">
+									Kumar Swapnil
+								</h2>
+							</div>
+						</div>
+						<div id="user-category-wrapper" class="row">
+							<div class="col-md-12">
+								<button class="btn rounded-circle">
+									1st Category
+								</button>
+							</div>
+						</div>
+						<div id="total-games-wrapper" class="row">
+							<div class="col-md-12">
+								<h4>
+									36 GAMES
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="profile-mini-stats" class="row">
+			<div class="col-md-4">
+				<span style="font-family: sans-serif;font-weight: bold;color: #FE7C60;"> WON</span> 21
+			</div>
+			<div class="col-md-4">
+				<span style="font-family: sans-serif;font-weight: bold;color: #F8C82D;">LOST</span> 9
+			</div>
+			<div class="col-md-4">
+				<span style="font-family: sans-serif;font-weight: bold;color: #0DCCC0;">DRAW</span> 6
+			</div>
+		</div>
+
+		<div id="chat-div" class="row">
+		</div>
+		</div>
+	</div>
+</div>
+<script src="/js/chessboard-0.3.0.js"></script>
+<script>
+    var board1 = ChessBoard('board1', 'start');
+</script>

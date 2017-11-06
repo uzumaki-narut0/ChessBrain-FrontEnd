@@ -1,134 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../crown.png">
+
+    <title>ChessBrain</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/cover.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/795dd48394.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css" href="/css/chessboard-0.3.0.css">
-    <link rel="stylesheet" type="text/css" href="/css/chat_behance.css">
-</head>
-<body>
-    
-	<div class="container-fluid">
-		<div class="row" style="height: 100%">
-			<div style="background-color: rgba(40, 50, 78);height: 100%;" class="col-md-1">
-				<ul id="sidebar-ul">
-					<li id="sidebar-li-app" class="sidebar-li">
-					<img src="https://lichess1.org/assets/images/learn/brutal-helm.svg">
-					CB
-					</li>
-					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
-						Castle
-					</li>
-					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Play
-					</li>
-					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/rally-the-troops.svg">Milestones</li>
-					<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
-				</ul>
-			</div>
-			<div id="chessboard-div" class="col-md-7">
-				<div style="height: 100%" class="row">
-					<div class="col-md-9">
-						<div id="board1">
-	            		</div>
-					</div>
-					<div id="timer" class="col-md-3">
-						<ul>
-							<li>
 
-								Magnus
-								<span class="label label-info">05:00</span>
-							</li>
-							<li style="padding-bottom: 10px">
-								<span class="label label-warning">Offer Draw</span><br>
-								<!-- <img src="img/clock.png" height="128px" width="128px"/> -->
-								<!-- <img height="128px" width="128px" src="https://lichess1.org/assets/images/learn/spinning-blades.svg"> -->
- 							</li>
- 							<li>
-								<span class="label label-danger">Resign</span><br>
-							</li>
-							<li style="padding-bottom: 0">
-								<span class="label label-info">04:59</span><br>
-							Swapnil
-							</li>
-						</ul>
-					</div>
-				</div>
-	            
-			</div>
-			<div id="chessWrapper" class="col-md-4">
-				<div id="profile-header" class="row">
-			<!-- 	<div class="col-md-1">
-				</div> -->
+  </head>
 
-				<div id="heading" class="col-md-12">
-					<i  class="fa fa-toggle-off fa" aria-hidden="true"></i>
-					PROFILE
-				</div>
-			</div>
+  <body data-vide-bg="video/1">
 
-			<div id="profile-info" class="row">
-				<div class="col-md-12">
-					<div id="profile-info-overlay" class="row">
-						<div class="col-md-12">
-							<div id="profile-pic-wrapper" class="row">
-								<div class="col-md-12">
-									<img id="user-pic" class="img-circle" src="img/crown(2).png">
-								</div>
-							</div>
-							<div id="user-name-wrapper" class="row">
-								<div class="col-md-12">
-									<span id="user-name">
-										Kumar Swapnil
-									</h2>
-								</div>
-							</div>
-							<div id="user-category-wrapper" class="row">
-								<div class="col-md-12">
-									<button class="btn rounded-circle">
-										1st Category
-									</button>
-								</div>
-							</div>
-							<div id="total-games-wrapper" class="row">
-								<div class="col-md-12">
-									<h4>
-										36 GAMES
-									</h2>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <div class="site-wrapper">
 
-			<div id="profile-mini-stats" class="row">
-				<div class="col-md-4">
-					<span style="font-family: sans-serif;font-weight: bold;color: #FE7C60;"> WON</span> 21
-				</div>
-				<div class="col-md-4">
-					<span style="font-family: sans-serif;font-weight: bold;color: #F8C82D;">LOST</span> 9
-				</div>
-				<div class="col-md-4">
-					<span style="font-family: sans-serif;font-weight: bold;color: #0DCCC0;">DRAW</span> 6
-				</div>
-			</div>
+      <div class="site-wrapper-inner">
 
-			<div id="chat-div" class="row">
-			</div>
-			</div>
-		</div>
-	</div>
-	<script src="/js/chessboard-0.3.0.js"></script>
-    <script>
-        var board1 = ChessBoard('board1', 'start');
-    </script>
-</body>
+        <div class="cover-container">
+
+          <header class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">ChessBrain</h3>
+              <nav class="nav nav-masthead">
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Developers</a>
+                <a class="nav-link" href="#">
+                  <i class="fa fa-code-fork" aria-hidden="true"></i>
+                  Fork
+                </a>
+              </nav>
+            </div>
+          </header>
+
+          <main role="main" class="inner cover">
+            <h1 class="cover-heading">Welcome to ChessBrain</h1>
+            <p class="lead">ChessBrain is a web based application which predicts chessboard FEN layouts from Chessboard images using the concepts of Image processing and Deep Learning. The game state can then be resumed in Single player as well as multiplayer mode.</p>
+            <p class="lead">
+              <a href="/authenticateUser.html" class="btn btn-lg btn-secondary">Get Started</a>
+            </p>
+          </main>
+
+          <footer class="mastfoot">
+            <div class="inner">
+              <p class="foot">Made with <i class="fa fa-heart" aria-hidden="true" style="color:#be1931"></i> by XeqtrS</p>
+            </div>
+          </footer>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="/js/jquery.vide.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/jquery.js"><\/script>')</script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
 </html>
