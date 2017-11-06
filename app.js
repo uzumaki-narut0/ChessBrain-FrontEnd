@@ -80,7 +80,7 @@ app.get('/handleSignup',function(req,res){
   //res.status(200).send(html);
 })
 
-app.get('/handleSignin',function(req,res){
+app.post('/handleSignin',function(req,res){
 	User.find(function(err, signInDetails){
 		if(err){
 			//login unsuccessfull
