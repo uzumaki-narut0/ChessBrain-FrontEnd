@@ -6,10 +6,9 @@ var mongoose = require('mongoose');
 
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
-//app.use(express.static(__dirname + '/public'));
 
 var portnumber = process.env.PORT || 8080;
 
@@ -89,9 +88,9 @@ app.post('/handleSignup',function(req,res){
   			losses : 0,
   			draws : 0
   		});
-  		gameStats.save(function(err{
+  		gameStats.save(function(err){
 
-  		}));
+  		});
   		console.log(gameStats);
   		res.render('home',{userDetails : req.body, userGameDetais : gameStats});
   	}
