@@ -52,7 +52,7 @@ mongoose.connect(process.env.MONGODB_URI, function (error) {
 
 app.get('/home',function(req,res){
   // console.log(req.params);
-  res.render('index'/*, {id: req.params.id, user: req.params.user
+  res.render('home'/*, {id: req.params.id, user: req.params.user
   }*/);
   //res.status(200).send(html);
 })
@@ -73,7 +73,7 @@ app.post('/handleSignup',function(req,res){
   		//signup successfull
   		//redirect to home page
   		// console.log()
-  		res.render('/home');
+  		res.render('home');
   	}
   });
   
