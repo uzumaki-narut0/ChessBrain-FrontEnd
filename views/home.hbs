@@ -94,7 +94,7 @@
 						<div id="total-games-wrapper" class="row">
 							<div class="col-md-12">
 								<h4>
-									36 GAMES
+									{{userGameDetails.totalGames}}
 								</h2>
 							</div>
 						</div>
@@ -105,13 +105,16 @@
 
 		<div id="profile-mini-stats" class="row">
 			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #FE7C60;"> WON</span> 21
+				<span style="font-family: sans-serif;font-weight: bold;color: #FE7C60;"> WON</span> 
+				{{userGameDetails.wins}}
 			</div>
 			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #F8C82D;">LOST</span> 9
+				<span style="font-family: sans-serif;font-weight: bold;color: #F8C82D;">LOST</span> 
+				{{userGameDetails.losses}}
 			</div>
 			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #0DCCC0;">DRAW</span> 6
+				<span style="font-family: sans-serif;font-weight: bold;color: #0DCCC0;">DRAW</span>
+				 {{userGameDetails.draws}}
 			</div>
 		</div>
 
