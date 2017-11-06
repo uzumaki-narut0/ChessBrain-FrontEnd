@@ -66,7 +66,8 @@ app.post('/handleSignup',function(req,res){
   	{
   		//signup unsuccessfull
   		//redirect to same page
-  		res.redirect("/new_signup");
+  		console.log(err);
+  		res.redirect("/authenticateUser");
   	}
   	else
   	{
