@@ -23,9 +23,8 @@ var statsSchema = mongoose.Schema;
 
 var userSchema = new Schema({
 	username: { type: String, required: true, unique: true },
-  	password: { type: String, required: true },
-    firstname    		: String,
-    lastname     		: String
+  	userpassword: { type: String, required: true },
+    usermail    		: String
 });
 
 var userStatsSchema = new Schema({
