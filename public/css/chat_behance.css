@@ -1,6 +1,6 @@
 html, body, .container-fluid, #chessWrapper {
 	height: 100%;
-	/*overflow: visible;*/
+	overflow: hidden;
 }
 #chessboard-div{
     /*background-color: #00A876;*/
