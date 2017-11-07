@@ -10,10 +10,10 @@
 				<li id="castle-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
 					Castle
 				</li>
-				<li id="play-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Play
+				<!-- <li id="creategame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Create
 				</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/rally-the-troops.svg">Milestones</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
+				<li id="joingame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/guards.svg">Join</li> -->
+				<li id="logout-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
 			</ul>
 		</div>
 		<div id="chessboard-div" class="col-md-7">
@@ -279,5 +279,18 @@ socket.on('updateboard',function(source, target){
 
 });
 
+$("castle-btn").on('click', function(){
+	$.get('https://chess-brain.herokuapp.com/home', function(data){
+    window.location = 'https://chess-brain.herokuapp.com/home';
+  });
+});
+
+$("logout-btn").on('click', function(){
+	//destroy session then redirect to start page
+	$.get('https://chess-brain.herokuapp.com', function(data){
+    window.location = 'https://chess-brain.herokuapp.com';
+  });
+
+});
 
 </script>
