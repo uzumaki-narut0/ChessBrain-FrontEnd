@@ -126,6 +126,7 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chessboard-0.3.0.js"></script>
+<script src="/js/timer.js"></script>
 <script type="text/javascript">
 // board defaults to the starting position when called with no parameters
 var game = new Chess();
@@ -156,14 +157,14 @@ var onDrop = function(source, target) {
     // illegal move
     if (move === null) return 'snapback';
 
-    //start timer for counter player and stop counter for current player
-
-
     console.log(source + " " + target);
     var unique_key = "{{id}}";
     console.log("indexx.hbs: " + unique_key);
     socket.emit('sendmove',source, target, unique_key);
     var currplayer = "{{playas}}";
+
+    //start timer for counter player and stop counter for current player
+    // socket.emit
     var nectplayer;
     if(currplayer == "white")
     {
@@ -205,8 +206,6 @@ var cfg = {
 
 //initializing ChessBoard
 board = ChessBoard('board1', cfg);
-</script>
-<script src="/js/timer.js">
 </script>
 <script>
 var socket = io();
