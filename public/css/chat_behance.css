@@ -120,8 +120,8 @@ html, body, .container-fluid, #chessWrapper {
 	box-sizing: border-box;
 	padding: 0;
 	border:none;
-    height: 550px;
-    width: 550px;
+    height: calc(100vh - 100px);
+    width: calc(100vh - 100px);
     /*background-color: red;*/
 }
 .board-b72b1{
