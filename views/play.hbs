@@ -130,7 +130,8 @@
 // board defaults to the starting position when called with no parameters
 var game = new Chess();
 var chance = "white";
-
+var chessTimer = new Timer();
+var chessTime = 5 * 60 ; //5 minutes
 
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
@@ -154,6 +155,9 @@ var onDrop = function(source, target) {
 
     // illegal move
     if (move === null) return 'snapback';
+
+    //start timer for counter player and stop counter for current player
+
 
     console.log(source + " " + target);
     var unique_key = "{{id}}";
@@ -202,6 +206,8 @@ var cfg = {
 //initializing ChessBoard
 board = ChessBoard('board1', cfg);
 </script>
+<script src="/js/timer.js">
+</script>
 <script>
 var socket = io();
 
@@ -212,7 +218,11 @@ var key = "{{id}}"
 socket.on('connect',function(){
   console.log('client successfully connected index');
   if(color == "white")
-    socket.emit('create', key);
+  {
+	chessTimer.start(chessTime);
+	socket.emit('create', key);
+  }
+    
   else
   {
     socket.emit('join', key);
@@ -290,6 +300,14 @@ $("logout-btn").on('click', function(){
 	$.get('https://chess-brain.herokuapp.com', function(data){
     window.location = 'https://chess-brain.herokuapp.com';
   });
+
+});
+
+$("offerdraw-btn").on('click', function(){
+
+});
+
+$("resign-btn").on('click', function(){
 
 });
 
