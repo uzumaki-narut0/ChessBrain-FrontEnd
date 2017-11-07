@@ -126,6 +126,8 @@ html, body, .container-fluid, #chessWrapper {
 }
 .board-b72b1{
 	border:0;
+	height: calc(100vh - 100px);
+    width: calc(100vh - 100px);
 	box-sizing: border-box;
 }
 #timer{
