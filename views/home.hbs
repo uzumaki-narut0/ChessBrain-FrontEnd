@@ -6,13 +6,13 @@
 				<img src="https://lichess1.org/assets/images/learn/brutal-helm.svg">
 				CB
 				</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
+				<li id="castle-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
 					Castle
 				</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Play
+				<li id="creategame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Create
 				</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/rally-the-troops.svg">Milestones</li>
-				<li class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
+				<li id="joingame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/guards.svg">Join</li>
+				<li id="logout-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
 			</ul>
 		</div>
 		<div id="chessboard-div" class="col-md-7">
@@ -126,4 +126,35 @@
 <script src="/js/chessboard-0.3.0.js"></script>
 <script>
     var board1 = ChessBoard('board1', 'start');
+</script>
+<script type="text/javascript">
+//event handlers for side-li buttons
+$("#creategame-btn").on('click', function(){
+  var uniquekey = Math.random().toString(36).slice(2);
+  $.get('https://chess-brain.herokuapp.com/' + uniquekey + '/white', function(data){
+    window.location = 'https://chess-brain.herokuapp.com/' + uniquekey + '/white';
+  });
+});
+
+$("#joingame-btn").on("click", function(){
+  var uniquekey = prompt("Unique key of the game?");
+  $.get('https://chess-brain.herokuapp.com/' + uniquekey + '/black', function(data){
+    window.location = 'https://chess-brain.herokuapp.com/' + uniquekey + '/black';
+  });
+});
+
+$("castle-btn").on('click', function(){
+	$.get('https://chess-brain.herokuapp.com/home', function(data){
+    window.location = 'https://chess-brain.herokuapp.com/home';
+  });
+});
+
+$("logout-btn").on('click', function(){
+	//destroy session then redirect to start page
+	$.get('https://chess-brain.herokuapp.com', function(data){
+    window.location = 'https://chess-brain.herokuapp.com';
+  });
+
+});
+
 </script>
