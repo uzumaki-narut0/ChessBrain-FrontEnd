@@ -120,14 +120,14 @@ html, body, .container-fluid, #chessWrapper {
 	box-sizing: border-box;
 	padding: 0;
 	border:none;
-    height: calc(100vh - 100px);
-    width: calc(100vh - 100px);
+    height: calc(100vh - 75px);
+    width: calc(100vh - 75px);
     /*background-color: red;*/
 }
 .board-b72b1{
 	border:0;
-	height: calc(100vh - 100px);
-    width: calc(100vh - 100px);
+	height: calc(100vh - 75px);
+    width: calc(100vh - 75px) !important;
 	box-sizing: border-box;
 }
 #timer{
