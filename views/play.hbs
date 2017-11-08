@@ -137,15 +137,6 @@ var chessTime = 5 * 60 ; //5 minutes
 var unique_key = "{{id}}";
 var currplayer = "{{playas}}";
 var nextplayer;
-var cfg = { //initial configuration for board
-  orientation: currplayer,
-  draggable: true,
-  position: 'start',
-  onDragStart: onDragStart,
-  onDrop: onDrop,
-  onSnapEnd: onSnapEnd
-};
-board = ChessBoard('board1', cfg); //initializing ChessBoard
 var socket = io();
 
 /*
@@ -197,6 +188,17 @@ var onSnapEnd = function()
 {
 	board.position(game.fen());
 };
+
+//it has to be placed below onDrop and onSnapEnd since they are function expressions
+var cfg = { //initial configuration for board
+  orientation: currplayer,
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = ChessBoard('board1', cfg); //initializing ChessBoard
 
 </script>
 <script>
