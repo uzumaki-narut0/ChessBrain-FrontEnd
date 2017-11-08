@@ -90,8 +90,8 @@
 			</div> -->
 
 			<div id="heading" class="col-md-12">
-				<i  class="fa fa-toggle-off fa" aria-hidden="true"></i>
-				PROFILE
+				<i  class="fa fa-toggle-on fa" aria-hidden="true"></i>
+				CHAT
 			</div>
 		</div>
 
@@ -100,29 +100,40 @@
 				<div id="profile-info-overlay" class="row">
 					<div class="col-md-12">
 						<div id="profile-pic-wrapper" class="row">
-							<div class="col-md-12">
+							<div class="col-md-4">
+								<img id="user-pic" class="img-circle" src="/img/crown(2).png">
+							</div>
+							<div class="col-md-4">
+								VS
+							</div>
+							<div class="col-md-4">
 								<img id="user-pic" class="img-circle" src="/img/crown(2).png">
 							</div>
 						</div>
 						<div id="user-name-wrapper" class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<span id="user-name">
-									{{userDetails.username}}
+									<!-- {{userDetails.username}} -->
+									Swapnil
+								</h2>
+							</div>
+							<div class="col-md-6">
+								<span id="user-opponent-name">
+									<!-- {{userDetails.username}} -->
+									Magnus
 								</h2>
 							</div>
 						</div>
 						<div id="user-category-wrapper" class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<button class="btn rounded-circle">
 									1st Category
 								</button>
 							</div>
-						</div>
-						<div id="total-games-wrapper" class="row">
-							<div class="col-md-12">
-								<h4>
-									{{userGameDetails.totalGames}} GAMES
-								</h2>
+							<div class="col-md-6">
+								<button class="btn rounded-circle">
+									2nd Category
+								</button>
 							</div>
 						</div>
 					</div>
@@ -130,23 +141,10 @@
 			</div>
 		</div>
 
-		<div id="profile-mini-stats" class="row">
-			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #FE7C60;"> WON</span> 
-				{{userGameDetails.wins}}
-			</div>
-			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #F8C82D;">LOST</span> 
-				{{userGameDetails.losses}}
-			</div>
-			<div class="col-md-4">
-				<span style="font-family: sans-serif;font-weight: bold;color: #0DCCC0;">DRAW</span>
-				 {{userGameDetails.draws}}
-			</div>
+		<div id="chat-div" class="row">
+			<!-- Todo here -->
 		</div>
 
-		<div id="chat-div" class="row">
-		</div>
 		</div>
 	</div>
 </div>
