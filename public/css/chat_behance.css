@@ -24,12 +24,15 @@ html, body, .container-fluid, #chessWrapper {
 	height: 45px;
 	background-color: #00897B;
 }
-#profile-info{
+#profile-info, #profile-info-chat{
 	background-image: url('../img/chess2.jpg');
 	height: 43%;
 	/*background-color: yellow;*/
 	background-position: center;
 	background-size: cover;
+}
+#profile-info-chat{
+	height : 37%;
 }
 #profile-mini-stats{
 	height: 57px;
