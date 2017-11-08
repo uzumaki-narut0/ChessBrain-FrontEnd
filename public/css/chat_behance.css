@@ -144,7 +144,7 @@ html, body, .container-fluid, #chessWrapper {
 }
 li{
 	list-style: none;
-	padding-bottom: 160px;
+	margin-bottom: 25vh;
 }
 ul{
 	list-style: none;
