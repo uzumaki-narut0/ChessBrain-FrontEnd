@@ -55,22 +55,28 @@ mongoose.connect(process.env.MONGODB_URI, function (error) {
 
 /*Socket.io PART */
 var game_room = {};
+var player_white = {};
+var player_black = {};
 
 io.on('connection', function(socket){
   console.log('a user connected');
 
   //when the client emits play, this listenes and executes
-  socket.on('create',function(uniquekey){
+  socket.on('create',function(uniquekey, playerWhite){
     game_room[uniquekey] = uniquekey;
+    player_white[uniquekey] = playerWhite;
     console.log(socket.room);
     socket.join(game_room[uniquekey]);
 
   });
 
   //when the client emits join, this listenes and executes
-  socket.on('join',function(uniquekey){
+  socket.on('join',function(uniquekey, playerBlack){
     socket.room = game_room[uniquekey];
     socket.join(game_room[uniquekey]);
+    player_black[uniquekey] = playerBlack;
+    //update both players info (name)
+    io.sockets.in(game_room[uniquekey]).emit('updatePlayersInfo', playerBlack, player_white[uniquekey]);
     console.log(socket.room);
   });
 

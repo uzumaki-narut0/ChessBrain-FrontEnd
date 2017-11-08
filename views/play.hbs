@@ -48,7 +48,7 @@
 					<ul>
 						<li>
 
-							Magnus<br>
+							<span id="opponent-name">Magnus<br>
 							<span class="label label-info">
 								<i class="fa fa-clock-o" aria-hidden="true"></i>
 								05:00
@@ -73,7 +73,9 @@
 								<i class="fa fa-clock-o" aria-hidden="true"></i>
 								04:59
 							</span><br>
-						{{userDetails.username}}
+							<span id="player-name">
+								{{userDetails.username}}
+							</span>
 						</li>
 					</ul>
 				</div>
@@ -159,6 +161,7 @@ var chessTime = 5 * 60 ; //5 minutes
 var unique_key = "{{id}}";
 var currplayer = "{{playas}}";
 var nextplayer;
+var gameResult;
 var socket = io();
 
 /*
@@ -235,11 +238,20 @@ socket.on('connect',function(){
   }
 });
 
-socket.on('updatechat',function(user, data){
-  console.log('updating chat');
-  console.log(data);
-});
 
+socket.on('updatePlayersInfo', function(playerBlack, playerWhite){
+	if(currplayer == 'white')
+	{
+		$("#player-name").text(playerWhite);
+		$("#opponent-name").text(playerBlack);
+	}
+	else
+	{
+		$("#player-name").text(playerBlack);
+		$("#opponent-name").text(playerWhite);
+	}
+  
+});
 //pass chance acknowledgment recieved (client side ack of syn->ack)
 socket.on('ackPassChance', function(currplayer){
   gameTurn = currplayer;	//overshadows global currplayer
@@ -301,9 +313,22 @@ $("#resign-btn").on('click', function(){
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
+//acknowledgment recieved for offer-draw
 $("#draw-accept-btn").on('click', function(){
 	//add one draw to both players database 
 	//redirect to castle (user's home)
+	gameResult = {
+		'resultCode' : 1,	//0 : draw, 1 : win/lose
+		'winner' : "swapnil",
+		'loser' : "magnus"
+	};
+	$.post( "https://chess-brain.herokuapp.com/gameResult", { result : gameResult }).done(function(data)
+	{
+		//game ended go home
+	    $.get('https://chess-brain.herokuapp.com/home', function(data){
+		    window.location = 'https://chess-brain.herokuapp.com/home';
+		});
+	});
 });
 
 $("#draw-reject-btn").on('click', function(){
