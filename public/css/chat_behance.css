@@ -58,7 +58,7 @@ html, body, .container-fluid, #chessWrapper {
 	/*padding: 5% 30%;*/
 	width: 72px;
 }
-#user-name,#total-games-wrapper{
+#user-name,#total-games-wrapper, #user-opponent-name{
 	color: #fff;
 	font-family: 'Raleway', sans-serif;
 	font-size: 24px;
