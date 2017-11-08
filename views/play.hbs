@@ -386,16 +386,16 @@ function timerOnTick(ms){
 	if(gameTurn == 'white')
 	{
 		if(currplayer == 'white')
-			$("#player-timer").text(ms);
+			$("#player-timer").text(ms/1000);
 		else
-			$("#opponent-timer").text(ms);
+			$("#opponent-timer").text(ms/1000);
 	}
 	else
 	{
 		if(currplayer == 'black')
-			$("#player-timer").text(ms);
+			$("#player-timer").text(ms/1000);
 		else
-			$("#opponent-timer").text(ms);
+			$("#opponent-timer").text(ms/1000);
 	}
 
 }
