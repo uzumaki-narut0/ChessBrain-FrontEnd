@@ -279,13 +279,13 @@ socket.on('offerresign-server-ack', function(unique_key, playerWhoIsOffering){
 	}
 });
 
-$("castle-btn").on('click', function(){
+$("#castle-btn").on('click', function(){
 	$.get('https://chess-brain.herokuapp.com/home', function(data){
     window.location = 'https://chess-brain.herokuapp.com/home';
   });
 });
 
-$("logout-btn").on('click', function(){
+$("#logout-btn").on('click', function(){
 	//destroy session then redirect to start page
 	$.get('https://chess-brain.herokuapp.com', function(data){
     window.location = 'https://chess-brain.herokuapp.com';
@@ -293,11 +293,11 @@ $("logout-btn").on('click', function(){
 
 });
 
-$("offerdraw-btn").on('click', function(){
+$("#offerdraw-btn").on('click', function(){
 	socket.emit('offerdraw-client-syn', unique_key, currplayer);//currplayer = player who is offering draw
 });
 
-$("resign-btn").on('click', function(){
+$("#resign-btn").on('click', function(){
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
