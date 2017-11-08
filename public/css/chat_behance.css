@@ -39,7 +39,7 @@ html, body, .container-fluid, #chessWrapper {
 	background-color: #6B7E91;
 }
 #chat-div{
-	height: 40%;
+	height: 50%;
 	background-color: rgba(40, 50, 78);
 }
 #profile-info .col-md-12
