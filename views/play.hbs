@@ -173,7 +173,7 @@ var onDragStart = function(source, piece, position, orientation) {
 */
 var onDrop = function(source, target) 
 {
-
+	console.log('gameTurn: '+ gameTurn + " " + "currplayer: " + currplayer);
 	if(gameTurn == currplayer)	//initially it would allow white, then alternate
 	{
 		var move = game.move({
@@ -203,19 +203,19 @@ var onSnapEnd = function()
 
 //on connection to server ask for user's name with an anonymous callback
 // var color = "{{playas}}";
-var key = "{{id}}"
+// var key = "{{id}}"
 
 socket.on('connect',function(){
   console.log('client successfully connected index');
   if(currplayer == "white")
   {
 	chessTimer.start(chessTime);
-	socket.emit('create', key);
+	socket.emit('create', unique_key);
   }
     
   else
   {
-    socket.emit('join', key);
+    socket.emit('join', unique_key);
   }
 });
 
