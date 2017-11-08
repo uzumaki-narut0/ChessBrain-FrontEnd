@@ -65,7 +65,7 @@ io.on('connection', function(socket){
   socket.on('create',function(uniquekey, playerWhite){
     game_room[uniquekey] = uniquekey;
     player_white[uniquekey] = playerWhite;
-    console.log(socket.room);
+    // console.log(socket.room);
     socket.join(game_room[uniquekey]);
 
   });
