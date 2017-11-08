@@ -128,14 +128,33 @@
 <script src="/js/chessboard-0.3.0.js"></script>
 <script src="/js/timer.js"></script>
 <script type="text/javascript">
+
 // board defaults to the starting position when called with no parameters
 var game = new Chess();
-var chance = "white";
+var gameTurn = "white"; // initially it would be white's turn to play
 var chessTimer = new Timer();
 var chessTime = 5 * 60 ; //5 minutes
+var unique_key = "{{id}}";
+var currplayer = "{{playas}}";
+var nextplayer;
+var cfg = { //initial configuration for board
+  orientation: currplayer,
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = ChessBoard('board1', cfg); //initializing ChessBoard
+var socket = io();
 
-// do not pick up pieces if the game is over
-// only pick up pieces for the side to move
+/*
+	onDragStart
+	1. Fires when a piece is picked up.
+	2. The drag action is prevented if the function returns false.
+	3. the function disables picking up pieces if the game is over
+	4. only pick up pieces for the side to move
+*/
 var onDragStart = function(source, piece, position, orientation) {
   if (game.game_over() === true ||
       (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
@@ -144,79 +163,51 @@ var onDragStart = function(source, piece, position, orientation) {
   }
 };
 
-var onDrop = function(source, target) {
-  // see if the move is legal
-  if(chance == "{{playas}}")
-  {
-      var move = game.move({
-      from: source,
-      to: target,
-      promotion: 'q' // NOTE: always promote to a queen for example simplicity
-    });
+/*
+	onDrop
+	1. Fires when a piece is dropped.
+	2. the function returns snapback when its opponent's turn
+	3. the function triggers 'sendmove' and 'triggerPassChance' if it is player's turn
+	game.move() is a chess.js function (no UI changes)
+	board.move() is a chessboard.js function (UI changes)
+*/
+var onDrop = function(source, target) 
+{
 
-    // illegal move
-    if (move === null) return 'snapback';
+	if(gameTurn == currplayer)	//initially it would allow white, then alternate
+	{
+		var move = game.move({
+			from: source,
+			to: target,
+			promotion: 'q' // NOTE: always promote to a queen for example simplicity
+		});
 
-    console.log(source + " " + target);
-    var unique_key = "{{id}}";
-    console.log("indexx.hbs: " + unique_key);
-    socket.emit('sendmove',source, target, unique_key);
-    var currplayer = "{{playas}}";
-
-    //start timer for counter player and stop counter for current player
-    // socket.emit
-    var nectplayer;
-    if(currplayer == "white")
-    {
-      nextplayer = "black";
-    }
-    else
-    {
-      nextplayer = "white";
-    }
-    socket.emit('whosechance', nextplayer, unique_key);
-
-  }
-  else
-  {
-    return'snapback';
-  }
-  
-  
-  //updateStatus();
+		if (move === null) return 'snapback'; // illegal move
+		socket.emit('sendmove',source, target, unique_key);
+		currplayer == 'white' ? (nextplayer = 'black') : (nextplayer = 'white');
+		socket.emit('triggerPassChance', nextplayer, unique_key);
+	}
+	else
+		return 'snapback';
 };
 
 // update the board position after the piece snap 
 // for castling, en passant, pawn promotion
-var onSnapEnd = function() {
-  board.position(game.fen());
+var onSnapEnd = function() 
+{
+	board.position(game.fen());
 };
 
-var x = "{{playas}}";
-
-console.log(x);
-var cfg = {
-  orientation: x,
-  draggable: true,
-  position: 'start',
-  onDragStart: onDragStart,
-  onDrop: onDrop,
-  onSnapEnd: onSnapEnd
-};
-
-//initializing ChessBoard
-board = ChessBoard('board1', cfg);
 </script>
 <script>
-var socket = io();
 
 //on connection to server ask for user's name with an anonymous callback
-var color = "{{playas}}";
+// var color = "{{playas}}";
 var key = "{{id}}"
 
 socket.on('connect',function(){
   console.log('client successfully connected index');
-  if(color == "white")
+  if(currplayer == "white")
   {
 	chessTimer.start(chessTime);
 	socket.emit('create', key);
@@ -233,59 +224,23 @@ socket.on('updatechat',function(user, data){
   console.log(data);
 });
 
-socket.on('flipchance', function(currplayer){
-  chance = currplayer;
+//pass chance acknowledgment recieved
+socket.on('ackPassChance', function(currplayer){
+  gameTurn = currplayer;
 });
 
 
-socket.on('updateboard',function(source, target){
-  //console.log(user);
-  console.log("target : " + target);
-  console.log("source : " + source);
-
-  board.move(source + '-' + target);
-
-  var move = game.move({
-  from: source,
-  to: target,
-  promotion: 'q' // NOTE: always promote to a queen for example simplicity
-});
+socket.on('updateboard',function(source, target)
+{
+	board.move(source + '-' + target);	//for chessboard.js
+  //game.move() is only for validation
+//   var move = game.move({
+//   from: source,
+//   to: target,
+//   promotion: 'q' // NOTE: always promote to a queen for example simplicity
+// });
   
-  updateStatus();
-
-  function updateStatus() {
-      var status = '';
-
-      var moveColor = 'White';
-      if (game.turn() === 'b') {
-        moveColor = 'Black';
-      }
-
-      // checkmate?
-      if (game.in_checkmate() === true) {
-        status = 'Game over, ' + moveColor + ' is in checkmate.';
-      }
-
-      // draw?
-      else if (game.in_draw() === true) {
-        status = 'Game over, drawn position';
-      }
-
-      // game still on
-      else {
-        status = moveColor + ' to move';
-
-        // check?
-        if (game.in_check() === true) {
-          status += ', ' + moveColor + ' is in check';
-        }
-      }
-
-      console.log(status);
-      console.log(game.fen());
-      console.log(game.pgn());
-    };
-
+	updateStatus();
 });
 
 $("castle-btn").on('click', function(){
@@ -309,5 +264,39 @@ $("offerdraw-btn").on('click', function(){
 $("resign-btn").on('click', function(){
 
 });
+
+function updateStatus() 
+{
+  var status = '';
+
+  var moveColor = 'White';
+  if (game.turn() === 'b') {
+    moveColor = 'Black';
+  }
+
+  // checkmate?
+  if (game.in_checkmate() === true) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+  }
+
+  // draw?
+  else if (game.in_draw() === true) {
+    status = 'Game over, drawn position';
+  }
+
+  // game still on
+  else {
+    status = moveColor + ' to move';
+
+    // check?
+    if (game.in_check() === true) {
+      status += ', ' + moveColor + ' is in check';
+    }
+  }
+
+  console.log(status);
+  console.log(game.fen());
+  console.log(game.pgn());
+}
 
 </script>

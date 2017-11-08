@@ -118,9 +118,8 @@ io.on('connection', function(socket){
   });
 
 
-  socket.on('whosechance',function(currplayer, uniquekey){
-    console.log('in whose chance');
-    io.sockets.in(game_room[uniquekey]).emit('flipchance',currplayer);
+  socket.on('triggerPassChance',function(currplayer, uniquekey){
+    io.sockets.in(game_room[uniquekey]).emit('ackPassChance',currplayer);
   })
 
   socket.on('sendchat',function(msg, uniquekey){
