@@ -55,81 +55,48 @@ mongoose.connect(process.env.MONGODB_URI, function (error) {
 
 /*Socket.io PART */
 var game_room = {};
-var users = {}; //users list
 
 io.on('connection', function(socket){
   console.log('a user connected');
 
   //when the client emits play, this listenes and executes
   socket.on('create',function(uniquekey){
-
-    socket.uniquekey = uniquekey; //a unique key corresponding to this game
-
     game_room[uniquekey] = uniquekey;
-    socket.room = game_room[uniquekey];
     console.log(socket.room);
-
-    //send client to room game_room[uniquekey]
     socket.join(game_room[uniquekey]);
 
-    //echo to client they have connected!
-    socket.emit('updatechat','SERVER','You have connected to room' + game_room[uniquekey]);
-
-    //echo to room1 that a person has connected to room1
-    socket.broadcast.to(game_room[uniquekey]).emit('updatechat','SERVER',"user_name" + 'has created this room');
-
-    //socket.emit('updaterooms',rooms,'room1');
-
   });
-
-
 
   //when the client emits join, this listenes and executes
   socket.on('join',function(uniquekey){
-
-    //stores the username in socket session for this client
-    console.log(uniquekey);
-  //  socket.username = user_name;
-    //send client to room1
     socket.room = game_room[uniquekey];
     socket.join(game_room[uniquekey]);
     console.log(socket.room);
-
-    //echo to client they have connected!
-    socket.emit('updatechat','SERVER','You have connected to '+ game_room[uniquekey]);
-
-    //echo to room1 that a person has connected to room1
-
-    socket.broadcast.to(game_room[uniquekey]).emit('updatechat','SERVER',"user_name" + 'has joined this room');
-
-  //  socket.emit('updaterooms',rooms,'room1');
-
   });
-
 
   //when the client emits send move, this listenes and executes
   socket.on('sendmove',function(source, target, uniquekey){
-
     //we tell the client to execute 'updateboard' with the parameters
-    console.log(source + " " + target);
-   // console.log(game_room[uniquekey]);
     io.sockets.in(game_room[uniquekey]).emit('updateboard', source, target);
-
   });
 
-
-  socket.on('triggerPassChance',function(currplayer, uniquekey){
-    io.sockets.in(game_room[uniquekey]).emit('ackPassChance',currplayer);
+  //pass chance to next player (server side 'syn' of syn->ack)
+  socket.on('triggerPassChance',function(nextplayer, uniquekey){
+    io.sockets.in(game_room[uniquekey]).emit('ackPassChance',nextplayer);
   })
 
-  socket.on('sendchat',function(msg, uniquekey){
-    io.sockets.in(game_room[uniquekey]).emit('updatechatui',msg);
+  //when the client emits offerdraw-client-syn, this listens and executes
+  socket.on('offerdraw-client-syn', function(uniquekey, playerWhoIsOffering){
+    io.sockets.in(game_room[uniquekey]).emit('offerdraw-server-ack', uniquekey, playerWhoIsOffering);
+  });
+
+  //when the client emits offerresign-client-syn, this listens and executes
+  socket.on('offerresign-client-syn', function(uniquekey, playerWhoIsOffering){
+    io.sockets.in(game_room[uniquekey]).emit('offerresign-server-ack', uniquekey, playerWhoIsOffering);
   });
 
   //when the user disonnects... perform this
   socket.on('disonnect',function(){
-    //echo globally that this client has left
-    socket.broadcast.emit('updatechat','SERVER', " disonnected");
     socket.leave(socket.room);
   });
 

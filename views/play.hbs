@@ -1,4 +1,26 @@
 <script src="/js/chess.js"></script>
+
+<!-- Draw Modal -->
+<div class="modal fade" id="drawModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">!!! DRAW !!!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your opponent is offering a draw.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Accept</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Reject</button>
+			</div>
+		</div>  
+	</div>
+</div>
+<!-- Draw Modal ends -->
+
 <div class="container-fluid">
 	<div class="row" style="height: 100%">
 		<div style="background-color: rgba(40, 50, 78);height: 100%;" class="col-md-1">
@@ -176,7 +198,7 @@ var onDrop = function(source, target)
 		if (move === null) return 'snapback'; // illegal move
 		socket.emit('sendmove',source, target, unique_key);
 		currplayer == 'white' ? (nextplayer = 'black') : (nextplayer = 'white');
-		socket.emit('triggerPassChance', nextplayer, unique_key);
+		socket.emit('triggerPassChance', nextplayer, unique_key);	//handshake starts from client
 	}
 	else
 		return 'snapback';
@@ -200,21 +222,13 @@ var cfg = { //initial configuration for board
 };
 board = ChessBoard('board1', cfg); //initializing ChessBoard
 
-</script>
-<script>
-
-//on connection to server ask for user's name with an anonymous callback
-// var color = "{{playas}}";
-// var key = "{{id}}"
-
 socket.on('connect',function(){
   console.log('client successfully connected index');
   if(currplayer == "white")
   {
 	chessTimer.start(chessTime);
 	socket.emit('create', unique_key);
-  }
-    
+  } 
   else
   {
     socket.emit('join', unique_key);
@@ -226,23 +240,43 @@ socket.on('updatechat',function(user, data){
   console.log(data);
 });
 
-//pass chance acknowledgment recieved
+//pass chance acknowledgment recieved (client side ack of syn->ack)
 socket.on('ackPassChance', function(currplayer){
-  gameTurn = currplayer;
+  gameTurn = currplayer;	//overshadows global currplayer
+});
+
+//update board UI (that is why using board.move() instead of game.move())
+socket.on('updateboard',function(source, target)
+{
+	board.move(source + '-' + target);	//for chessboard.js  
+	game.move({
+		from: source,
+		to: target,
+		promotion: 'q' // NOTE: always promote to a queen for example simplicity
+	});
+	updateStatus();	//handle draw | checkmate| check | game still on
 });
 
 
-socket.on('updateboard',function(source, target)
-{
-	board.move(source + '-' + target);	//for chessboard.js
-  //game.move() is only for validation
-//   var move = game.move({
-//   from: source,
-//   to: target,
-//   promotion: 'q' // NOTE: always promote to a queen for example simplicity
-// });
-  
-	updateStatus();
+socket.on('offerdraw-server-ack', function(unique_key, playerWhoIsOffering){
+	if(currplayer != playerWhoIsOffering)
+	{
+		//open a modal and ask for approval, then update database if accepted draw
+		$("#drawModal").modal();
+	}
+});
+
+socket.on('offerresign-server-ack', function(unique_key, playerWhoIsOffering){
+	if(currplayer != playerWhoIsOffering)
+	{
+		//add to database won
+		console.log("you won");
+	}
+	else
+	{
+		console.log("you lost");
+		//add to database lost
+	}
 });
 
 $("castle-btn").on('click', function(){
@@ -260,11 +294,11 @@ $("logout-btn").on('click', function(){
 });
 
 $("offerdraw-btn").on('click', function(){
-
+	socket.emit('offerdraw-client-syn', unique_key, currplayer);//currplayer = player who is offering draw
 });
 
 $("resign-btn").on('click', function(){
-
+	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
 function updateStatus() 
