@@ -176,3 +176,6 @@ ul{
 .container-fluid{
 	padding-left: 0;
 }
+#offerdraw-btn, #resign-button{
+	cursor: pointer;
+}

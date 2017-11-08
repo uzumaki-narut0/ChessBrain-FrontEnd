@@ -13,8 +13,8 @@
 				<p>Your opponent is offering a draw.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Accept</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Reject</button>
+				<button id="draw-accept-btn" type="button" class="btn btn-default" data-dismiss="modal">Accept</button>
+				<button id="draw-reject-btn" type="button" class="btn btn-default" data-dismiss="modal">Reject</button>
 			</div>
 		</div>  
 	</div>
@@ -299,6 +299,15 @@ $("#offerdraw-btn").on('click', function(){
 
 $("#resign-btn").on('click', function(){
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
+});
+
+$("#draw-accept-btn").on('click', function(){
+	//add one draw to both players database 
+	//redirect to castle (user's home)
+});
+
+$("#draw-reject-btn").on('click', function(){
+	//do nothing
 });
 
 function updateStatus() 
