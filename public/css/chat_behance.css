@@ -58,9 +58,8 @@ html, body, .container-fluid, #chessWrapper {
 	/*margin-bottom: -40px;*/
 }
 #user-pic{
-	height: 72px;
-	/*padding: 5% 30%;*/
-	width: 72px;
+	height: 12vh;
+	width: 12vh;
 }
 #user-name,#total-games-wrapper, #user-opponent-name{
 	color: #fff;
