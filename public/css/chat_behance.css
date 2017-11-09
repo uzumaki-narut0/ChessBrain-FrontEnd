@@ -190,3 +190,7 @@ ul{
 	background-color: #B0BEC5;
 	height: 8vh;
 }
+#send-msg-btn{
+	border-radius: 0;
+	float: right;
+}
