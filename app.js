@@ -121,12 +121,13 @@ app.get('/home',function(req,res){
   {
     Stats.find({username:req.session.username}, function(err, userGameDetails)
     {
-      res.render("home",{userDetails : userDetails[0], userGameDetails :userGameDetails[0]});
+      res.render("home",{userDetails : {username : req.session.username}, userGameDetails :userGameDetails[0]});
     });
   }
   else
   {
     //redirect to login page
+    res.redirect('/authenticateUser.html');
 
   }
 })
