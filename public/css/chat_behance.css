@@ -191,9 +191,14 @@ ul{
 	height: 8vh;
 }
 #send-msg-btn{
+	position: absolute;
 	border-radius: 0;
+	background-color: #455A64;
+	color: #fff;
+	font-family: 'Raleway', sans-serif;
 	float: right;
 	height: 8vh;
 	right: 0;
 	bottom: 0;
+	box-sizing: border-box;
 }
