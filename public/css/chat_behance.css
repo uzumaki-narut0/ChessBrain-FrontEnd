@@ -204,7 +204,7 @@ ul{
 	box-sizing: border-box;
 }
 #opponent-msg{
-	font-family: 'Lato', sans-serif;
+	font-family:  sans-serif;
 	font-size: 15px;
 	width:75%;
 	background-color: #CFD8DC;
@@ -216,7 +216,7 @@ ul{
 	margin-right: 20%; 
 }
 #player-msg{
-	font-family: 'Lato', sans-serif;
+	font-family:  sans-serif;
 	font-size: 15px;
 	width:75%;
 	padding: 10px 10px;
