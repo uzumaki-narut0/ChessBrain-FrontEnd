@@ -213,8 +213,8 @@ ul{
 	color: #424242;
 	margin-bottom:8px;
 	margin-top:8px;
-	margin-left: 10px;
-	margin-right: 20%; 
+	margin-left: 1vw;
+	margin-right: 1vw; 
 }
 #player-msg{
 	font-family:  sans-serif;
@@ -224,8 +224,8 @@ ul{
 	padding: 10px 10px;
 	background-color: #CFD8DC;
 	color: #424242;
-	margin-left: 20%;
-	margin-right: 10px;
+	margin-left: 1vw;
+	margin-right: 1vw;
 	margin-bottom:8px;
 	margin-top: 8px;
 }
