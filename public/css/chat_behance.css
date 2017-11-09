@@ -219,6 +219,8 @@ ul{
 }
 #player-msg{
 	display: inline-block;
+	position: relative;
+	right: 1vw;
 	font-family:  sans-serif;
 	text-align: right;
 	font-size: 15px;
