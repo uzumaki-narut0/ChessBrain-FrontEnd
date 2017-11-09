@@ -139,7 +139,7 @@ html, body, .container-fluid, #chessWrapper {
 	margin-left: -10px;
 	color:#fff;
 	padding-left: 0;
-	font-size: 3.5vh;
+	font-size: 3.75vh;
 	text-align: center;
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
@@ -147,7 +147,7 @@ html, body, .container-fluid, #chessWrapper {
 }
 li{
 	list-style: none;
-	margin-bottom: 25vh;
+	margin-bottom: 27vh;
 }
 ul{
 	list-style: none;
