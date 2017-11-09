@@ -196,7 +196,8 @@ ul{
 	background-color: #455A64;
 	color: #fff;
 	font-family: 'Raleway', sans-serif;
-	float: right;
+	padding-left: 10px;
+	padding-right: 10px;
 	height: 8vh;
 	right: 0;
 	bottom: 0;
