@@ -5,12 +5,14 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);  //socket server which integrates with (mounts on) http server
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
+var session = require('express-session');
 
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+app.use(session({secret:'sakurasou', saveUninitialized:false, resave:false}));
 
 var portnumber = process.env.PORT || 8080;
 
@@ -115,8 +117,18 @@ io.on('connection', function(socket){
 /* Routing PART*/
 
 app.get('/home',function(req,res){
-  res.render('home'/*, {id: req.params.id, user: req.params.user
-  }*/);
+  if(req.session.username)
+  {
+    Stats.find({username:req.session.username}, function(err, userGameDetails)
+    {
+      res.render("home",{userDetails : userDetails[0], userGameDetails :userGameDetails[0]});
+    });
+  }
+  else
+  {
+    //redirect to login page
+
+  }
 })
 
 app.post('/handleSignup',function(req,res){
@@ -141,17 +153,20 @@ app.post('/handleSignup',function(req,res){
 
   		});
   		console.log(gameStats);
+      req.session.username = req.body.username; //storing into session
   		res.render('home',{userDetails : req.body, userGameDetails : gameStats});
   	}
   });
 })
 
-app.post('/handleSignin',function(req,res){
+app.post('/home',function(req,res){
 	Signup.find(req.body, function(err, userDetails){
 		if(err){
 			res.redirect("/authenticateUser.html");
 		}	
 		else{
+      req.session.username = req.body.username; //storing into session
+
 			console.log(userDetails);
 			var x = Stats.find({username:req.body.username}, function(err, userGameDetails)
 			{

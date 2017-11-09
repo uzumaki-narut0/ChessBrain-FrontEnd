@@ -374,6 +374,10 @@ $("#resign-btn").on('click', function(){
 $("#draw-accept-btn").on('click', function(){
 	//add one draw to both players database 
 	//redirect to castle (user's home)
+
+	$("#game-result-p").text("Game Drawn");
+	/*
+	$("#resultsModal").modal();
 	gameResult = {
 		'resultCode' : 1,	//0 : draw, 1 : win/lose
 		'winner' : "swapnil",
@@ -386,6 +390,7 @@ $("#draw-accept-btn").on('click', function(){
 		    window.location = 'https://chess-brain.herokuapp.com/home';
 		});
 	});
+	*/
 });
 
 $("#draw-reject-btn").on('click', function(){
