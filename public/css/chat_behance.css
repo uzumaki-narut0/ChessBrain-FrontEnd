@@ -193,4 +193,7 @@ ul{
 #send-msg-btn{
 	border-radius: 0;
 	float: right;
+	height: 8vh;
+	right: 0;
+	bottom: 0;
 }
