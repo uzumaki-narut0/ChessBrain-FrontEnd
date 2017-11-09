@@ -21,6 +21,26 @@
 </div>
 <!-- Draw Modal ends -->
 
+<!-- Game Results Modal -->
+<div class="modal fade" id="resultsModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Game Ended</h4>
+			</div>
+			<div class="modal-body">
+				<p id="game-result-p"></p>
+			</div>
+			<div class="modal-footer">
+				<button id="draw-accept-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>  
+	</div>
+</div>
+<!-- Game Results Modal ends -->
+
 <div class="container-fluid">
 	<div class="row" style="height: 100%">
 		<div style="background-color: rgba(40, 50, 78);height: 100%;" class="col-md-1">
@@ -279,6 +299,8 @@ socket.on('updatePlayersInfo', function(playerBlack, playerWhite){
 });
 //pass chance acknowledgment recieved (client side ack of syn->ack)
 socket.on('ackPassChance', function(currplayer){
+	//maybe it delays for one of the client.. hence the time gap
+	//implement timer code on server side for syncing the timers
   gameTurn = currplayer;	//overshadows global currplayer
   if(gameTurn == 'white')
   {
@@ -382,11 +404,15 @@ function updateStatus()
   // checkmate?
   if (game.in_checkmate() === true) {
     status = 'Game over, ' + moveColor + ' is in checkmate.';
+    $("#game-result-p").text(status);
+    $("#resultsModal").modal();
   }
 
   // draw?
   else if (game.in_draw() === true) {
     status = 'Game over, drawn position';
+    $("#game-result-p").text(status);
+    $("#resultsModal").modal();
   }
 
   // game still on
