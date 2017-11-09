@@ -40,7 +40,7 @@ html, body, .container-fluid, #chessWrapper {
 }
 #chat-div{
 	height: 65%;
-	background-color: rgba(40, 50, 78);
+	background-color: rgb(40, 50, 78);
 }
 #profile-info .col-md-12, #profile-info-chat .col-md-12
 {

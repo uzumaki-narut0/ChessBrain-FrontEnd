@@ -179,10 +179,16 @@ app.post('/home',function(req,res){
 
 app.get('/:id/:playas',function(req,res){
   console.log(req.params);
-  res.render('play', {id: req.params.id,
-    playas: req.params.playas
-  });
-  //res.status(200).send(html);
+  if(req.session.username)
+  {
+    res.render('play', {id: req.params.id,
+      playas: req.params.playas
+    }); 
+  }
+  else
+  {
+    res.redirect('/authenticateUser.html');
+  }
 })
 
 http.listen(portnumber, function () {
