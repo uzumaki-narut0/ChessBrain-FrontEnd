@@ -40,6 +40,7 @@ html, body, .container-fluid, #chessWrapper {
 }
 #chat-div{
 	height: 65%;
+	padding-top: 10px;
 	background-color: rgb(40, 50, 78);
 }
 #profile-info .col-md-12, #profile-info-chat .col-md-12
@@ -206,7 +207,7 @@ ul{
 #opponent-msg{
 	font-family:  sans-serif;
 	font-size: 15px;
-	width:75%;
+	width:calc(80% - 10px);
 	background-color: #CFD8DC;
 	padding: 10px 10px;
 	color: #424242;
@@ -218,7 +219,7 @@ ul{
 #player-msg{
 	font-family:  sans-serif;
 	font-size: 15px;
-	width:75%;
+	width:calc(80% - 10px);
 	padding: 10px 10px;
 	background-color: #CFD8DC;
 	color: #424242;
