@@ -183,3 +183,10 @@ ul{
 #offerdraw-btn, #resign-btn{
 	cursor: pointer;
 }
+#chat-div-footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	height: 60vh;
+}
