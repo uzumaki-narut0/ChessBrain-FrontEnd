@@ -205,21 +205,25 @@ ul{
 }
 #opponent-msg{
 	font-family: 'Lato', sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	width:80%;
 	background-color: #CFD8DC;
 	padding: 10px 10px;
-	color: #9C27B0;
-	margin-bottom:10px;
+	color: #424242;
+	margin-bottom:8px;
+	margin-top:8px;
+	margin-left: 10px;
 	margin-right: 20%; 
 }
 #player-msg{
 	font-family: 'Lato', sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	width:80%;
 	padding: 10px 10px;
-	background-color: #F5F5F5;
-	color: #FFC107;
+	background-color: #CFD8DC;
+	color: #424242;
 	margin-left: 20%;
-	margin-bottom:10px;
+	margin-right: 10px;
+	margin-bottom:8px;
+	margin-top: 8px;
 }
