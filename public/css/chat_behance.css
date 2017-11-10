@@ -134,8 +134,12 @@ html, body, .container-fluid, #chessWrapper {
 	box-sizing: border-box;
 }
 .board-b72b1 img{
-	height: calc((100vh - 75px)/8);
-	width: calc((100vh - 75px)/8);
+	height: calc((100vh - 75px)/8) !important;
+	width: calc((100vh - 75px)/8) !important;
+}
+.row-5277c div{
+	height: calc((100vh - 75px)/8) !important;
+	width: calc((100vh - 75px)/8) !important;	
 }
 #timer{
 	height: 100%;
