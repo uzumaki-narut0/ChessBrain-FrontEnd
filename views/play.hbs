@@ -449,6 +449,7 @@ function updateStatus()
     $("#game-result-p").text(status);
     $("#resultsModal").modal();
     //avoid both clients making a post request
+    console.log(currplayer + "making post request");
 	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
   }
 
