@@ -138,7 +138,7 @@ app.get('/home',function(req,res){
 })
 
 app.post('/handleSignup',function(req,res){
-  console.log(req.body);
+  // console.log(req.body);
   var result = new Signup(req.body);
   result.save(function(err){
   	if(err)
@@ -197,8 +197,8 @@ app.get('/:id/:playas',function(req,res){
 })
 
 app.post('/resultUpdate', function(req, res){
-  console.log(req);
-  res.send("200");
+  // console.log(req);
+  // res.send("200");
   if(req.body.code == 0)  //draw
   {
     Stats.find({username:req.body.user1}, function(err, userGameDetails)
@@ -220,6 +220,8 @@ app.post('/resultUpdate', function(req, res){
   {
       Stats.find({username:req.body.user1}, function(err, userGameDetails)
       {
+        console.log('hhhhhhh');
+        console.log(userGameDetails);
          no_of_wins = userGameDetails['wins'] + 1;
       });
       Stats.find({username:req.body.user2}, function(err, userGameDetails)
