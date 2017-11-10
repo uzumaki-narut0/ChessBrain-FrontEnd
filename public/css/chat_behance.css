@@ -133,14 +133,6 @@ html, body, .container-fluid, #chessWrapper {
     width: calc(100vh - 75px) !important;
 	box-sizing: border-box;
 }
-.row-5277c div, .board-b72b1 img{
-	height: calc((100vh - 75px)/8) !important;
-	width: calc((100vh - 75px)/8) !important;
-}
-.row-5277c{
-	height: calc((100vh - 75px)/8) !important;
-	width: calc(100vh - 75px) !important;	
-}
 
 #timer{
 	height: 100%;
