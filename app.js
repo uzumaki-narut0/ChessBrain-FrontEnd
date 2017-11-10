@@ -222,10 +222,11 @@ app.post('/resultUpdate', function(req, res){
       {
          console.log('hhhhhhh');
          console.log(userGameDetails);
+         no_of_wins = userGameDetails[0]['wins'] + 1;
          Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins}, function(err, user) {
             if (err) throw err;
           });
-         no_of_wins = userGameDetails[0]['wins'] + 1;
+         
       });
       Stats.find({username:req.body.user2}, function(err, userGameDetails)
       {
