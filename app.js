@@ -6,11 +6,12 @@ var io = require('socket.io')(http);  //socket server which integrates with (mou
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
-
+var morgan  = require('morgan');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('combined'))
 app.use(express.static(__dirname + '/public'));
 app.use(session({secret:'sakurasou', saveUninitialized:false, resave:false}));
 
