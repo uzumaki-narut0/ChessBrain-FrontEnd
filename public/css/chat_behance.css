@@ -139,7 +139,7 @@ html, body, .container-fluid, #chessWrapper {
 }
 .row-5277c{
 	height: calc((100vh - 75px)/8) !important;
-	width: calc((100vh - 75px)/8) !important;	
+	width: calc(100vh - 75px) !important;	
 }
 #timer{
 	height: 100%;
