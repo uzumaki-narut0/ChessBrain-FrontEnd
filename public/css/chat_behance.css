@@ -137,7 +137,7 @@ html, body, .container-fluid, #chessWrapper {
 	height: calc((100vh - 75px)/8) !important;
 	width: calc((100vh - 75px)/8) !important;
 }
-.row-5277c div{
+.row-5277c{
 	height: calc((100vh - 75px)/8) !important;
 	width: calc((100vh - 75px)/8) !important;	
 }
