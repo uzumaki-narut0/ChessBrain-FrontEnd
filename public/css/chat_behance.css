@@ -215,7 +215,7 @@ ul{
 	padding: 10px 15px;
 	color: #424242;
 	margin: 10px 5vw 10px 1vw;
-	 text-shadow: 2px 2px #ff0000;
+	box-shadow: 12px 15px 20px 0 rgba(46,61,73,.15);
 }
 .player-msg{
 	display: inline-block;
@@ -228,7 +228,7 @@ ul{
 	background-color: #CFD8DC;
 	color: #424242;
 	margin: 10px 1vw 10px 5vw;
-	 text-shadow: 2px 2px #ff0000;
+	box-shadow: -12px -15px 20px 0 rgba(46,61,73,.15);
 }
 #message{
 	height: 100%;
