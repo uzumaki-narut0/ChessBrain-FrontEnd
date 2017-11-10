@@ -194,6 +194,7 @@ ul{
 #send-msg-btn{
 	position: absolute;
 	border-radius: 0;
+	width:6vw;
 	background-color: #455A64;
 	color: #fff;
 	font-family: 'Raleway', sans-serif;
@@ -229,6 +230,6 @@ ul{
 }
 #message{
 	height: 100%;
-	width:50vw;
+	width:29vw;
 	background-color: transparent;
 }
