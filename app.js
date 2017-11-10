@@ -203,15 +203,17 @@ app.post('/resultUpdate', function(req, res){
   {
     Stats.find({username:req.body.user1}, function(err, userGameDetails)
     {
-       no_of_draw_1 = userGameDetails[0]['draws'] + 1;
-       Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1}, function(err, user) {
+       let no_of_draw_1 = userGameDetails[0]['draws'] + 1;
+       let tot_games = userGameDetails[0]['totalGames'] + 1;
+       Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1, totalGames : tot_games}, function(err, user) {
           if (err) throw err;
         });
     });
     Stats.find({username:req.body.user2}, function(err, userGameDetails)
     {
-       no_of_draw_2 = userGameDetails[0]['draws'] + 1;
-       Stats.findOneAndUpdate({ username: req.body.user2 }, {draws : no_of_draw_2}, function(err, user) {
+       let no_of_draw_2 = userGameDetails[0]['draws'] + 1;
+       let tot_games = userGameDetails[0]['totalGames'] + 1;
+       Stats.findOneAndUpdate({ username: req.body.user2 }, {draws : no_of_draw_2, totalGames : tot_games}, function(err, user) {
           if (err) throw err;
         });
     });  
@@ -222,7 +224,7 @@ app.post('/resultUpdate', function(req, res){
       {
          console.log('hhhhhhh');
          console.log(userGameDetails);
-         no_of_wins = userGameDetails[0]['wins'] + 1;
+         let no_of_wins = userGameDetails[0]['wins'] + 1;
          let tot_games = userGameDetails[0]['totalGames'] + 1;
          Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins, totalGames : tot_games}, function(err, user) {
             if (err) throw err;
@@ -234,7 +236,7 @@ app.post('/resultUpdate', function(req, res){
 
          console.log('ggggggg' + req.body.user2);
          console.log(userGameDetails);
-         no_of_losses = userGameDetails[0]['losses'] + 1;
+         let no_of_losses = userGameDetails[0]['losses'] + 1;
          let tot_games = userGameDetails[0]['totalGames'] + 1;
          Stats.findOneAndUpdate({ username: req.body.user2 }, {losses : no_of_losses, totalGames : tot_games}, function(err, user)
           {
