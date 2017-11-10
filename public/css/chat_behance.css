@@ -39,7 +39,8 @@ html, body, .container-fluid, #chessWrapper {
 	background-color: #6B7E91;
 }
 #chat-div{
-	height: 65%;
+	height: calc(65% - 45px);
+	overflow-y: scroll;
 	padding-top: 10px;
 	background-color: rgb(40, 50, 78);
 }
