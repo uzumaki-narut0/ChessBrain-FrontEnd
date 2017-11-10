@@ -195,6 +195,44 @@ app.get('/:id/:playas',function(req,res){
   }
 })
 
+app.post('/resultUpdate', function(req, res){
+  if(req.body.code == 0)  //draw
+  {
+    Stats.find({username:req.body.user1}, function(err, userGameDetails)
+    {
+       no_of_draw_1 = userDetails['draws'] + 1;
+    });
+    Stats.find({username:req.body.user2}, function(err, userGameDetails)
+    {
+       no_of_draw_2 = userDetails['draws'] + 1;
+    });
+    Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1}, function(err, user) {
+    if (err) throw err;
+    });
+    Stats.findOneAndUpdate({ username: req.body.user2 }, {draws : no_of_draw_2}, function(err, user) {
+    if (err) throw err;
+    });  
+  }
+  else  //someone won
+  {
+      Stats.find({username:req.body.user1}, function(err, userGameDetails)
+      {
+         no_of_wins = userDetails['wins'] + 1;
+      });
+      Stats.find({username:req.body.user2}, function(err, userGameDetails)
+      {
+         no_of_losses = userDetails['losses'] + 1;
+      });
+      Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins}, function(err, user) {
+      if (err) throw err;
+      });
+      Stats.findOneAndUpdate({ username: req.body.user2 }, {losses : no_of_losses}, function(err, user) {
+      if (err) throw err;
+      });
+  }
+  res.sendStatus(200);  
+});
+
 http.listen(portnumber, function () {
   console.log('Example app listening on port!'+portnumber);
 })

@@ -448,6 +448,12 @@ function updateStatus()
     status = 'Game over, ' + moveColor + ' is in checkmate.';
     $("#game-result-p").text(status);
     $("#resultsModal").modal();
+    gameResult = {
+		code : 1,	//0 : draw, 1 : win/lose
+		user1 : "a",
+		user2 : "kumar"
+	};
+	$.post( "https://chess-brain.herokuapp.com/gameResult", { result : gameResult });
   }
 
   // draw?
