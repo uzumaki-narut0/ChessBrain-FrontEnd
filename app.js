@@ -204,36 +204,38 @@ app.post('/resultUpdate', function(req, res){
     Stats.find({username:req.body.user1}, function(err, userGameDetails)
     {
        no_of_draw_1 = userGameDetails[0]['draws'] + 1;
+       Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1}, function(err, user) {
+          if (err) throw err;
+        });
     });
     Stats.find({username:req.body.user2}, function(err, userGameDetails)
     {
        no_of_draw_2 = userGameDetails[0]['draws'] + 1;
-    });
-    Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1}, function(err, user) {
-    if (err) throw err;
-    });
-    Stats.findOneAndUpdate({ username: req.body.user2 }, {draws : no_of_draw_2}, function(err, user) {
-    if (err) throw err;
+       Stats.findOneAndUpdate({ username: req.body.user2 }, {draws : no_of_draw_2}, function(err, user) {
+          if (err) throw err;
+        });
     });  
   }
   else  //someone won
   {
       Stats.find({username:req.body.user1}, function(err, userGameDetails)
       {
-        console.log('hhhhhhh');
-        console.log(userGameDetails);
+         console.log('hhhhhhh');
+         console.log(userGameDetails);
+         Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins}, function(err, user) {
+            if (err) throw err;
+          });
          no_of_wins = userGameDetails[0]['wins'] + 1;
       });
       Stats.find({username:req.body.user2}, function(err, userGameDetails)
       {
          no_of_losses = userGameDetails[0]['losses'] + 1;
+         Stats.findOneAndUpdate({ username: req.body.user2 }, {losses : no_of_losses}, function(err, user)
+          {
+              if (err) throw err;
+          });
       });
-      Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins}, function(err, user) {
-      if (err) throw err;
-      });
-      Stats.findOneAndUpdate({ username: req.body.user2 }, {losses : no_of_losses}, function(err, user) {
-      if (err) throw err;
-      });
+      
   }
   res.sendStatus(200);  
 });
