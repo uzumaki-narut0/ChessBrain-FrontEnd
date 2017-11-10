@@ -204,7 +204,7 @@ ul{
 	bottom: 0;
 	box-sizing: border-box;
 }
-#opponent-msg{
+.opponent-msg{
 	display: inline-block;
 	float: left;
 	clear: both;
@@ -215,7 +215,7 @@ ul{
 	color: #424242;
 	margin: 10px 1vw;
 }
-#player-msg{
+.player-msg{
 	display: inline-block;
 	font-family:  sans-serif;
 	float: right;
