@@ -231,6 +231,7 @@ app.post('/resultUpdate', function(req, res){
       });
       Stats.find({username:req.body.user2}, function(err, userGameDetails)
       {
+         console.log('ggggggg');
          no_of_losses = userGameDetails[0]['losses'] + 1;
          let tot_games = userGameDetails[0]['totalGames'] + 1;
          Stats.findOneAndUpdate({ username: req.body.user2 }, {losses : no_of_losses, totalGames : tot_games}, function(err, user)
