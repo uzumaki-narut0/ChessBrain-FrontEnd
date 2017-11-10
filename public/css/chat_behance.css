@@ -133,7 +133,6 @@ html, body, .container-fluid, #chessWrapper {
     width: calc(100vh - 75px) !important;
 	box-sizing: border-box;
 }
-
 #timer{
 	height: 100%;
 	padding-left: 0;
