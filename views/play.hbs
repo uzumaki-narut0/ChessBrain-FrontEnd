@@ -212,12 +212,8 @@ var nextplayer;
 var gameResult;
 var socket = io();	//this will trigger io.on('connection', function(socket) -> check it
 var flag = 0;
-var opponent_msg_template = '<span class="opponent-msg">\
-							Dummy message from opponent\
-						</span><br>';
-var player_msg_template = '<span class="player-msg">\
-							Msg from player\
-						</span><br>';
+var opponent_msg_template = '<span class="opponent-msg"></span><br>';
+var player_msg_template = '<span class="player-msg"></span><br>';
 whiteTimer.start(chessTime);
 whiteTimer.pause();
 blackTimer.start(chessTime);
