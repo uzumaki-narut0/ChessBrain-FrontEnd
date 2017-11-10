@@ -197,6 +197,8 @@ app.get('/:id/:playas',function(req,res){
 })
 
 app.post('/resultUpdate', function(req, res){
+  console.log(req);
+  res.send("200");
   if(req.body.code == 0)  //draw
   {
     Stats.find({username:req.body.user1}, function(err, userGameDetails)
