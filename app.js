@@ -11,7 +11,7 @@ var morgan  = require('morgan');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 app.use(express.static(__dirname + '/public'));
 app.use(session({secret:'sakurasou', saveUninitialized:false, resave:false}));
 
