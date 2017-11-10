@@ -203,11 +203,11 @@ app.post('/resultUpdate', function(req, res){
   {
     Stats.find({username:req.body.user1}, function(err, userGameDetails)
     {
-       no_of_draw_1 = userDetails['draws'] + 1;
+       no_of_draw_1 = userGameDetails['draws'] + 1;
     });
     Stats.find({username:req.body.user2}, function(err, userGameDetails)
     {
-       no_of_draw_2 = userDetails['draws'] + 1;
+       no_of_draw_2 = userGameDetails['draws'] + 1;
     });
     Stats.findOneAndUpdate({ username: req.body.user1 }, {draws : no_of_draw_1}, function(err, user) {
     if (err) throw err;
@@ -220,11 +220,11 @@ app.post('/resultUpdate', function(req, res){
   {
       Stats.find({username:req.body.user1}, function(err, userGameDetails)
       {
-         no_of_wins = userDetails['wins'] + 1;
+         no_of_wins = userGameDetails['wins'] + 1;
       });
       Stats.find({username:req.body.user2}, function(err, userGameDetails)
       {
-         no_of_losses = userDetails['losses'] + 1;
+         no_of_losses = userGameDetails['losses'] + 1;
       });
       Stats.findOneAndUpdate({ username: req.body.user1 }, {wins : no_of_wins}, function(err, user) {
       if (err) throw err;
