@@ -172,7 +172,7 @@
 			</span>
 		</div>
 		<div id="chat-div-footer" class="row">
-			<input type="text">	
+			<input id="message" type="text">	
 		</div>
 		<button id="send-msg-btn" class="btn-primary">
 				Send
@@ -213,7 +213,7 @@ var gameResult;
 var socket = io();	//this will trigger io.on('connection', function(socket) -> check it
 var flag = 0;
 var opponent_msg_template = '<span class="opponent-msg"></span>';
-var player_msg_template = '<span class="player-msg"></span>';
+var player_msg_template = '<span class="player-msg"></span>	';
 whiteTimer.start(chessTime);
 whiteTimer.pause();
 blackTimer.start(chessTime);
@@ -364,10 +364,13 @@ socket.on('offerresign-server-ack', function(unique_key, playerWhoIsOffering){
 	}
 });
 
-socket.on('server-msg-ack', function(unique_key, playerWhoSentMsg){
+socket.on('server-msg-ack', function(unique_key, playerWhoSentMsg, message_received){
 	if(currplayer != playerWhoSentMsg)
 	{
-		var elem2 = document.createElement(opponent_msg_template);
+		var elem2 = document.createElement('span');
+		$(elem2).addClass("opponent-msg");
+		var node = document.createTextNode(message_received);
+		elem2.appendChild(node);
 		$("#chat-div").append(elem2);
 	}
 });
@@ -422,9 +425,13 @@ $("#draw-reject-btn").on('click', function(){
 });
 
 $("#send-msg-btn").on('click', function(){
-	var elem = document.createElement(opponent_msg_template);
+	var elem = document.createElement('span');
+	$(elem).addClass("player-msg");
 	$("#chat-div").append(elem);
-	socket.emit('client-msg-syn', unique_key, currplayer);
+	var player_msg_node = document.createTextNode($('#message').val());
+	elem.appendChild(player_msg_node);
+	socket.emit('client-msg-syn', unique_key, currplayer, $('#message').val());
+	$('#message').val('');
 });
 
 function updateStatus() 

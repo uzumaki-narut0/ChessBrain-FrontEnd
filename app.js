@@ -103,8 +103,8 @@ io.on('connection', function(socket){
     io.sockets.in(game_room[uniquekey]).emit('offerresign-server-ack', uniquekey, playerWhoIsOffering);
   });
 
-  socket.on('client-msg-syn', function(uniquekey, playerWhoSentMsg){
-    io.sockets.in(game_room[uniquekey]).emit('server-msg-ack', uniquekey, playerWhoSentMsg);
+  socket.on('client-msg-syn', function(uniquekey, playerWhoSentMsg, message){
+    io.sockets.in(game_room[uniquekey]).emit('server-msg-ack', uniquekey, playerWhoSentMsg, message);
   });
 
   //when the user disonnects... perform this
