@@ -227,3 +227,8 @@ ul{
 	color: #424242;
 	margin: 10px 1vw;
 }
+#message{
+	height: 100%;
+	width:3.75vw;
+	background-color: transparent;
+}
