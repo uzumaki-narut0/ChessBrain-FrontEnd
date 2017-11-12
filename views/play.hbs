@@ -394,6 +394,7 @@ $("#offerdraw-btn").on('click', function(){
 });
 
 $("#resign-btn").on('click', function(){
+	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
@@ -403,21 +404,7 @@ $("#draw-accept-btn").on('click', function(){
 	//redirect to castle (user's home)
 
 	$("#game-result-p").text("Game Drawn");
-	/*
-	$("#resultsModal").modal();
-	gameResult = {
-		'resultCode' : 1,	//0 : draw, 1 : win/lose
-		'winner' : "swapnil",
-		'loser' : "magnus"
-	};
-	$.post( "https://chess-brain.herokuapp.com/gameResult", { result : gameResult }).done(function(data)
-	{
-		//game ended go home
-	    $.get('https://chess-brain.herokuapp.com/home', function(data){
-		    window.location = 'https://chess-brain.herokuapp.com/home';
-		});
-	});
-	*/
+	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 0, user1 : "a", user2 : "b" });
 });
 
 $("#draw-reject-btn").on('click', function(){
