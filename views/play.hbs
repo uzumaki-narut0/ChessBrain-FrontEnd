@@ -362,13 +362,15 @@ socket.on('offerresign-server-ack', function(unique_key, playerWhoIsOffering){
 	if(currplayer != playerWhoIsOffering)
 	{
 		//add to database won
-		console.log("you won");
-		$("#resultsModal").modal("You won");
+		// console.log("you won");
+		$("#game-result-p").text("you won");
+   		$("#resultsModal").modal();
 	}
 	else
 	{
-		console.log("you lost");
-		$("#resultsModal").modal("You lost!");
+		// console.log("you lost");
+		$("#game-result-p").text("you lost");
+    	$("#resultsModal").modal();
 		//add to database lost
 	}
 });
