@@ -288,11 +288,11 @@ socket.on('connect',function(){
   console.log('client successfully connected index');
   if(currplayer == "white")
   {
-	socket.emit('create', unique_key, "swapnil");
+	socket.emit('create', unique_key, "{{userDetails.username}}");
   } 
   else
   {
-    socket.emit('join', unique_key, "magnus");
+    socket.emit('join', unique_key, "{{userDetails.username}}");
   }
 });
 
