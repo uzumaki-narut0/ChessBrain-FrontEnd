@@ -208,6 +208,8 @@ var blackTimer = new Timer({
 var chessTime = 5 * 60 ; //5 minutes
 var unique_key = "{{id}}";
 var currplayer = "{{playas}}";
+var playerName;
+var opponentName;
 var nextplayer;
 var gameResult;
 var socket = io();	//this will trigger io.on('connection', function(socket) -> check it
@@ -296,13 +298,18 @@ socket.on('connect',function(){
 
 
 socket.on('updatePlayersInfo', function(playerBlack, playerWhite){
+
 	if(currplayer == 'white')
 	{
+		playerName = playerWhite;
+		opponentName = playerBlack;
 		$("#player-name").text(playerWhite);
 		$("#opponent-name").text(playerBlack);
 	}
 	else
 	{
+		playerName = playerBlack;
+		opponentName = playerWhite;
 		$("#player-name").text(playerBlack);
 		$("#opponent-name").text(playerWhite);
 	}
@@ -356,10 +363,12 @@ socket.on('offerresign-server-ack', function(unique_key, playerWhoIsOffering){
 	{
 		//add to database won
 		console.log("you won");
+		$("#resultsModal").modal("You won");
 	}
 	else
 	{
 		console.log("you lost");
+		$("#resultsModal").modal("You lost!");
 		//add to database lost
 	}
 });
@@ -394,7 +403,7 @@ $("#offerdraw-btn").on('click', function(){
 });
 
 $("#resign-btn").on('click', function(){
-	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
+	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
@@ -404,7 +413,7 @@ $("#draw-accept-btn").on('click', function(){
 	//redirect to castle (user's home)
 
 	$("#game-result-p").text("Game Drawn");
-	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 0, user1 : "a", user2 : "b" });
+	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 0, user1 : playerName, user2 : opponentName });
 });
 
 $("#draw-reject-btn").on('click', function(){
