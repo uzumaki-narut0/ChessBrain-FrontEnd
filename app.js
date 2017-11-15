@@ -220,6 +220,7 @@ app.post('/resultUpdate', function(req, res){
   }
   else  //someone won
   {
+      console.log(req.body.user1);
       Stats.find({username:req.body.user1}, function(err, userGameDetails)
       {
          console.log('hhhhhhh');

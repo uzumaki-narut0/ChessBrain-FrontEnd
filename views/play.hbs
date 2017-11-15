@@ -403,6 +403,7 @@ $("#offerdraw-btn").on('click', function(){
 });
 
 $("#resign-btn").on('click', function(){
+	console.log(playerName + " " + opponentName );
 	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
