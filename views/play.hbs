@@ -131,15 +131,15 @@
 						</div>
 						<div id="user-name-wrapper" class="row">
 							<div class="col-md-6">
-								<span id="user-name">
-									<!-- {{userDetails.username}} -->
-									Swapnil
-								</h2>
-							</div>
-							<div class="col-md-6">
 								<span id="user-opponent-name">
 									<!-- {{userDetails.username}} -->
 									Magnus
+								</h2>
+							</div>
+							<div class="col-md-6">
+								<span id="user-name">
+									<!-- {{userDetails.username}} -->
+									Swapnil
 								</h2>
 							</div>
 						</div>
@@ -304,14 +304,18 @@ socket.on('updatePlayersInfo', function(playerBlack, playerWhite){
 		playerName = playerWhite;
 		opponentName = playerBlack;
 		$("#player-name").text(playerWhite);
+		$("#user-name").text(playerWhite);
 		$("#opponent-name").text(playerBlack);
+		$("#user-opponent-name").text(playerBlack);
 	}
 	else
 	{
 		playerName = playerBlack;
 		opponentName = playerWhite;
 		$("#player-name").text(playerBlack);
+		$("#user-name").text(playerBlack);
 		$("#opponent-name").text(playerWhite);
+		$("#user-opponent-name").text(playerWhite);
 	}
 
 	//now start the timer of white
