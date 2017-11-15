@@ -68,6 +68,7 @@ io.on('connection', function(socket){
   socket.on('create',function(uniquekey, playerWhite){
     game_room[uniquekey] = uniquekey;
     player_white[uniquekey] = playerWhite;
+    console.log(playerBlack);
     // console.log(socket.room);
     socket.join(game_room[uniquekey]);
 
@@ -80,7 +81,7 @@ io.on('connection', function(socket){
     player_black[uniquekey] = playerBlack;
     //update both players info (name)
     io.sockets.in(game_room[uniquekey]).emit('updatePlayersInfo', playerBlack, player_white[uniquekey]);
-    console.log(socket.room);
+    console.log(playerBlack);
   });
 
   //when the client emits send move, this listenes and executes
