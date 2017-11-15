@@ -188,7 +188,10 @@ app.get('/:id/:playas',function(req,res){
   if(req.session.username)
   {
     res.render('play', {id: req.params.id,
-      playas: req.params.playas
+      playas: req.params.playas,
+      userDetails : {
+        username : req.session.username
+      }
     }); 
   }
   else
