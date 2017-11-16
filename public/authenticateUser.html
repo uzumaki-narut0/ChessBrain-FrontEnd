@@ -98,6 +98,7 @@
 			display: none;
 		}
 		body {
+			
 		  background: #76b852; /* fallback for old browsers */
 		  background-color: rgba(40, 50, 78, 0.6);
 		  background: -webkit-linear-gradient(right, rgba(40, 50, 78, 0.7), rgba(40, 50, 78, 0.9));
@@ -115,7 +116,7 @@
 	  <div class="form">
 	  	<h3 >Login to ChessBrain</h3>
 	  	<h3 class="appname">Signup to ChessBrain</h3>
-	    <form class="register-form" action="/handleSignup" method="post">
+	    <form id="myForm" class="register-form" action="/handleSignup" method="post" onsubmit="return validateForm()">
 	      <input name="username" type="text" placeholder="name"/>
 	      <input name="userpassword" type="password" placeholder="password"/>
 	      <input name="usermail" type="text" placeholder="email address"/>
@@ -123,8 +124,8 @@
 	      <p class="message">Already registered? <a href="#">Sign In</a></p>
 	    </form>
 	    <form class="login-form" action="/home" method="post">
-	      <input name="username" type="text" placeholder="username"/>
-	      <input name="userpassword" type="password" placeholder="password"/>
+	      <input id="username" name="username" type="text" placeholder="username"/>
+	      <input id="userpassword" name="userpassword" type="password" placeholder="password"/>
 	      <button>login</button>
 	      <p class="message">Not registered? <a href="#">Create an account</a></p>
 	    </form>
@@ -135,6 +136,22 @@
 			$('h3').toggleClass("appname");
 		   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 		});
+
+		$(".login-form").submit(function(event){
+		    event.preventDefault();
+		    console.log($('#username').val());
+		    $.post('/' + $('#username').val() + '/home', $(".login-form").serialize(), function(data) {
+		        window.location = '/' + $('#username').val() + '/home';
+		    });
+	    });
+
+		function validateForm() {
+		    var x = document.forms["myForm"]["fname"].value;
+		    if (x == "") {
+		        alert("Name must be filled out");
+		        return false;
+		    }
+		} 
 	</script>
 
 </body>

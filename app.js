@@ -11,6 +11,7 @@ var morgan  = require('morgan');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // app.use(morgan('combined'))
 app.use(express.static(__dirname + '/public'));
 app.use(session({secret:'sakurasou', saveUninitialized:false, resave:false}));
@@ -53,6 +54,7 @@ mongoose.connect(process.env.MONGODB_URI, function (error) {
     	}
     else console.log('mongo connected');
 });
+// mongoose.connect('mongodb://localhost:27017', { useMongoClient: true });
 
 
 
@@ -63,7 +65,6 @@ var player_black = {};
 
 io.on('connection', function(socket){
   console.log('a user connected');
-
   //when the client emits play, this listenes and executes
   socket.on('create',function(uniquekey, playerWhite){
     game_room[uniquekey] = uniquekey;
@@ -85,9 +86,10 @@ io.on('connection', function(socket){
   });
 
   //when the client emits send move, this listenes and executes
-  socket.on('sendmove',function(source, target, uniquekey){
+  socket.on('sendmove',function(source, target, uniquekey, fen){
     //we tell the client to execute 'updateboard' with the parameters
     io.sockets.in(game_room[uniquekey]).emit('updateboard', source, target);
+
   });
 
   //pass chance to next player (server side 'syn' of syn->ack)
@@ -122,8 +124,8 @@ io.on('connection', function(socket){
 
 /* Routing PART*/
 
-app.get('/home',function(req,res){
-  if(req.session.username)
+app.get('/:userid/home',function(req,res){
+  if(req.params.userid == req.session.username)
   {
     Stats.find({username:req.session.username}, function(err, userGameDetails)
     {
@@ -166,7 +168,8 @@ app.post('/handleSignup',function(req,res){
   });
 })
 
-app.post('/home',function(req,res){
+//logging in.... creating a new session
+app.post('/:userid/home',function(req,res){
 	Signup.find(req.body, function(err, userDetails){
 		if(err){
 			res.redirect("/authenticateUser.html");
@@ -183,16 +186,19 @@ app.post('/home',function(req,res){
 	});
 })
 
-app.get('/:id/:playas',function(req,res){
-  console.log(req.params);
-  if(req.session.username)
+app.get('/:userid/:id/:playas',function(req,res){
+  // console.log(req.params);
+
+  if(req.params.userid == req.session.username)
   {
-    res.render('play', {id: req.params.id,
+      res.render('play', {id: req.params.id,
       playas: req.params.playas,
       userDetails : {
-        username : req.session.username
-      }
-    }); 
+          username : req.session.username,
+          gamestate : 'start'
+        }
+      });  
+     
   }
   else
   {

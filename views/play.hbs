@@ -258,7 +258,7 @@ var onDrop = function(source, target)
 		});
 
 		if (move === null) return 'snapback'; // illegal move
-		socket.emit('sendmove',source, target, unique_key);
+		socket.emit('sendmove',source, target, unique_key, board.fen());
 		currplayer == 'white' ? (nextplayer = 'black') : (nextplayer = 'white');
 		socket.emit('triggerPassChance', nextplayer, unique_key);	//handshake starts from client
 	}
@@ -274,10 +274,12 @@ var onSnapEnd = function()
 };
 
 //it has to be placed below onDrop and onSnapEnd since they are function expressions
+var pos = "{{userDetails.gamestate}}";
+console.log(pos);
 var cfg = { //initial configuration for board
   orientation: currplayer,
   draggable: true,
-  position: 'start',
+  position: "{{userDetails.gamestate}}",
   onDragStart: onDragStart,
   onDrop: onDrop,
   onSnapEnd: onSnapEnd
