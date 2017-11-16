@@ -74,7 +74,7 @@
 					<div class="col-md-12">
 						<div id="profile-pic-wrapper" class="row">
 							<div class="col-md-12">
-								<img id="user-pic" class="img-circle" src="img/crown(2).png">
+								<img id="user-pic" class="img-circle" src="/img/crown(2).png">
 							</div>
 						</div>
 						<div id="user-name-wrapper" class="row">
@@ -144,8 +144,8 @@ $("#joingame-btn").on("click", function(){
 });
 
 $("castle-btn").on('click', function(){
-	$.get('https://chess-brain.herokuapp.com/home', function(data){
-    window.location = 'https://chess-brain.herokuapp.com/home';
+	$.get('https://chess-brain.herokuapp.com' + "{{userDetails.username}}" + '/home', function(data){
+    window.location = 'https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/home';
   });
 });
 
