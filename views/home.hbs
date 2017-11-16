@@ -131,14 +131,14 @@
 //event handlers for side-li buttons
 $("#creategame-btn").on('click', function(){
   var uniquekey = Math.random().toString(36).slice(2);
-  $.get('https://chess-brain.herokuapp.com/' + uniquekey + '/white', function(data){
+  $.get('https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/white', function(data){
     window.location = 'https://chess-brain.herokuapp.com/' + uniquekey + '/white';
   });
 });
 
 $("#joingame-btn").on("click", function(){
   var uniquekey = prompt("Unique key of the game?");
-  $.get('https://chess-brain.herokuapp.com/' + uniquekey + '/black', function(data){
+  $.get('https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
     window.location = 'https://chess-brain.herokuapp.com/' + uniquekey + '/black';
   });
 });
