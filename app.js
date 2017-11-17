@@ -7,8 +7,10 @@ var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var morgan  = require('morgan');
+var cors = require('cors');
 
 var bodyParser = require('body-parser');
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -171,7 +173,8 @@ app.post('/handleSignup',function(req,res){
 //logging in.... creating a new session
 app.post('/:userid/home',function(req,res){
 	Signup.find(req.body, function(err, userDetails){
-		if(err){
+		if(userDetails.length == 0){
+      // res.sendStatus(200);
 			res.redirect("/authenticateUser.html");
 		}	
 		else{

@@ -141,6 +141,7 @@
 		    event.preventDefault();
 		    console.log($('#username').val());
 		    $.post('/' + $('#username').val() + '/home', $(".login-form").serialize(), function(data) {
+		        console.log(data);
 		        window.location = '/' + $('#username').val() + '/home';
 		    });
 	    });
