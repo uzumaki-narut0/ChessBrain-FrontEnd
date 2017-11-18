@@ -389,19 +389,24 @@ socket.on('server-msg-ack', function(unique_key, playerWhoSentMsg, message_recei
 		var node = document.createTextNode(message_received);
 		elem2.appendChild(node);
 		$("#chat-div").append(elem2);
+		let ht = document.getElementById("chat-div").scrollHeight;
+		// $("#chat-div").scrollTop(ht);
+		$("#chat-div").animate({scrollTop:ht}, 1000, 'swing', function() { 
+		   // alert("Finished animating");
+		});
 	}
 });
 
 $("#castle-btn").on('click', function(){
-	$.get('https://chess-brain.herokuapp.com/home', function(data){
-    window.location = 'https://chess-brain.herokuapp.com/home';
+	$.get('/' +"{{userDetails.username}}"+ '/home', function(data){
+    window.location = '/home';
   });
 });
 
 $("#logout-btn").on('click', function(){
 	//destroy session then redirect to start page
-	$.get('https://chess-brain.herokuapp.com', function(data){
-    window.location = 'https://chess-brain.herokuapp.com';
+	$.get('/', function(data){
+    window.location = '/';
   });
 
 });
@@ -412,7 +417,7 @@ $("#offerdraw-btn").on('click', function(){
 
 $("#resign-btn").on('click', function(){
 	console.log(playerName + " " + opponentName );
-	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
+	$.post( "/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
@@ -422,7 +427,7 @@ $("#draw-accept-btn").on('click', function(){
 	//redirect to castle (user's home)
 
 	$("#game-result-p").text("Game Drawn");
-	$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 0, user1 : playerName, user2 : opponentName });
+	$.post( "/resultUpdate", { code : 0, user1 : playerName, user2 : opponentName });
 });
 
 $("#draw-reject-btn").on('click', function(){
@@ -435,6 +440,10 @@ $("#send-msg-btn").on('click', function(){
 	$("#chat-div").append(elem);
 	var player_msg_node = document.createTextNode($('#message').val());
 	elem.appendChild(player_msg_node);
+	let ht = document.getElementById("chat-div").scrollHeight;
+	$("#chat-div").animate({scrollTop:ht}, 1000, 'swing', function() { 
+		   // alert("Finished animating");
+		});
 	socket.emit('client-msg-syn', unique_key, currplayer, $('#message').val());
 	$('#message').val('');
 });
@@ -456,7 +465,7 @@ function updateStatus()
     //avoid both clients making a post request [redundancy in database updation]
     console.log(currplayer + "making post request");
     if(currplayer == 'white')
-		$.post( "https://chess-brain.herokuapp.com/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
+		$.post( "/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
   }
 
   // draw?

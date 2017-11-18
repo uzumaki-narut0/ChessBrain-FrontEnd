@@ -131,21 +131,21 @@
 //event handlers for side-li buttons
 $("#creategame-btn").on('click', function(){
   var uniquekey = Math.random().toString(36).slice(2);
-  $.get('https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/white', function(data){
-    window.location = 'https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/white';
+  $.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/white', function(data){
+    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/white';
   });
 });
 
 $("#joingame-btn").on("click", function(){
   var uniquekey = prompt("Unique key of the game?");
-  $.get('https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
-    window.location = 'https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/' + uniquekey + '/black';
+  $.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
+    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/black';
   });
 });
 
 $("castle-btn").on('click', function(){
-	$.get('https://chess-brain.herokuapp.com' + "{{userDetails.username}}" + '/home', function(data){
-    window.location = 'https://chess-brain.herokuapp.com/' + "{{userDetails.username}}" + '/home';
+	$.get('/' + "{{userDetails.username}}" + '/home', function(data){
+    window.location = '/' + "{{userDetails.username}}" + '/home';
   });
 });
 
