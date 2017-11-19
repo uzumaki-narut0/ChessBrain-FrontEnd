@@ -116,16 +116,16 @@
 	  <div class="form">
 	  	<h3 >Login to ChessBrain</h3>
 	  	<h3 class="appname">Signup to ChessBrain</h3>
-	    <form id="myForm" class="register-form" action="/handleSignup" method="post" onsubmit="return validateForm()">
-	      <input name="username" type="text" placeholder="name"/>
-	      <input name="userpassword" type="password" placeholder="password"/>
-	      <input name="usermail" type="text" placeholder="email address"/>
+	    <form id="myForm" class="register-form" action="/handleSignup" method="post">
+	      <input name="username" type="text" pattern=".{6,}" title="Six or more characters" placeholder="name" required/>
+	      <input name="userpassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="password" required/>
+	      <input name="usermail" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="email address" required/>
 	      <button>create</button>
 	      <p class="message">Already registered? <a href="#">Sign In</a></p>
 	    </form>
 	    <form class="login-form" action="/home" method="post">
-	      <input id="username" name="username" type="text" placeholder="username"/>
-	      <input id="userpassword" name="userpassword" type="password" placeholder="password"/>
+	      <input id="username" name="username" type="text" placeholder="username" required/>
+	      <input id="userpassword" name="userpassword" type="password" placeholder="password" required/>
 	      <button>login</button>
 	      <p class="message">Not registered? <a href="#">Create an account</a></p>
 	    </form>
@@ -146,13 +146,6 @@
 		    });
 	    });
 
-		function validateForm() {
-		    var x = document.forms["myForm"]["fname"].value;
-		    if (x == "") {
-		        alert("Name must be filled out");
-		        return false;
-		    }
-		} 
 	</script>
 
 </body>

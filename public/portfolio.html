@@ -17,7 +17,8 @@
 		}
 		.first-screen{
 			/*height: 100%;*/
-			background-color: #f69679;
+			/*background-color: #f69679;*/
+			background: linear-gradient(135deg,#2c3e50,#48647c);
 		}
 		.second-screen{
 			background-color: #09f;
@@ -128,7 +129,7 @@
     		top: 70vh;
     		/*font-family: 'Roboto', sans-serif;*/
     		font-size: 48px;
-    		color:rgba(109,71,217,.92);
+    		/*color:rgba(109,71,217,.92);*/
     		/*background-color:rgba(0,0,0,0.5); */
     	}
     	#github-icon,#stack-icon,#linked-icon{
@@ -177,7 +178,8 @@
 				<h2 id="element-support">
 					MEET THE SQUAD
 					<br>
-					<img id="down-arrow" src="/img/down-arrow-sketch(2).png"/>
+					<!-- <br> -->
+					<img id="down-arrow" src="/img/arrow2.png"/>
 				</h2>
 			</div>
 		</div>
@@ -319,13 +321,13 @@ $('#screen4-link').on('click',function(){
 });
 	$('#down-arrow').hover(function(){
 		console.log('ji');
-		$('#down-arrow').animate({
-			margin: '+10px'
+		$('#down-arrow img').animate({
+			'marginTop': '+10px'
 		});
 
 	}, function(){
-		$('#down-arrow').animate({
-			margin: '-10px'
+		$('#down-arrow img').animate({
+			'marginTop': '-10px'
 		});		
 	});
 	$('#down-arrow').on('click', function(){

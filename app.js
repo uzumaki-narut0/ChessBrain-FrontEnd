@@ -170,6 +170,20 @@ app.post('/handleSignup',function(req,res){
   });
 })
 
+
+app.get('/:userid/home',function(req,res){
+  if(req.params.userid == req.session.username)
+  {
+      Stats.find({username:req.params.userid}, function(err, userGameDetails)
+      {
+        res.render("home",{userDetails : userDetails[0], userGameDetails :userGameDetails[0]});
+      });
+  }
+  else
+  {
+    res.redirect("/authenticateUser.html");
+  }
+});
 //logging in.... creating a new session
 app.post('/:userid/home',function(req,res){
 	Signup.find(req.body, function(err, userDetails){

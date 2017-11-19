@@ -399,7 +399,7 @@ socket.on('server-msg-ack', function(unique_key, playerWhoSentMsg, message_recei
 
 $("#castle-btn").on('click', function(){
 	$.get('/' +"{{userDetails.username}}"+ '/home', function(data){
-    window.location = '/home';
+    window.location = '/' + "{{userDetails.username}}" + '/home';
   });
 });
 
