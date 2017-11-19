@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(session({secret:'sakurasou', saveUninitialized:false, resave:false}));
 
-var portnumber = process.env.PORT || 8080;
+var portnumber = process.env.PORT || 3000;
 
 app.engine('hbs',hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname+'/views'}));//first argument is engine name which can be anything
 app.set('views', path.join(__dirname, 'views'));
@@ -48,15 +48,15 @@ var Signup = mongoose.model('User', signupSchemaObj);
 var Stats = mongoose.model('userStats', statsSchemaObj);
 
 //establishing connection
-mongoose.connect(process.env.MONGODB_URI, function (error) {
-    if (error) 
-    	{
-    		console.error(error);
-    		console.log("error aa rha hai!!");
-    	}
-    else console.log('mongo connected');
-});
-// mongoose.connect('mongodb://localhost:27017', { useMongoClient: true });
+// mongoose.connect(process.env.MONGODB_URI, function (error) {
+//     if (error) 
+//     	{
+//     		console.error(error);
+//     		console.log("error aa rha hai!!");
+//     	}
+//     else console.log('mongo connected');
+// });
+mongoose.connect('mongodb://localhost:27017', { useMongoClient: true });
 
 
 
