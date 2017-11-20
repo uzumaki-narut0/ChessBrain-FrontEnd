@@ -1,7 +1,6 @@
 version: "2"
 services:
   web:
-    container_name: app
     restart: always
     build: .
     ports:
@@ -10,7 +9,6 @@ services:
       - db
     command: npm start
   db:
-    container_name: mongo
     image: mongo
     volumes:
       - ./data:/data/db
