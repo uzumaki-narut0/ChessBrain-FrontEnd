@@ -7,7 +7,14 @@ services:
       - "3000:3000"
     links:
       - db
+      - api
     command: npm start
+  api:
+    restart: always
+    build: ./API/
+    ports:
+      - "5000:5000"
+    command: python app.py
   db:
     image: mongo
     volumes:
