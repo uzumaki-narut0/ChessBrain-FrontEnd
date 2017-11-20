@@ -417,7 +417,9 @@ $("#offerdraw-btn").on('click', function(){
 
 $("#resign-btn").on('click', function(){
 	console.log(playerName + " " + opponentName );
-	$.post( "/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
+	//user1 = winner
+	//user2 = loser
+	$.post( "/resultUpdate", { code : 1, user1 : opponentName, user2 : playerName });
 	socket.emit('offerresign-client-syn', unique_key, currplayer);	//currplayer = player who is resigning
 });
 
@@ -465,7 +467,18 @@ function updateStatus()
     //avoid both clients making a post request [redundancy in database updation]
     console.log(currplayer + "making post request");
     if(currplayer == 'white')
-		$.post( "/resultUpdate", { code : 1, user1 : "a", user2 : "b" });
+    {
+    	if(moveColor == 'White')
+    	{
+    		$.post( "/resultUpdate", { code : 1, user1 : opponentName, user2 : playerName });	
+    	}
+    	else
+    	{
+    		//black (opponent) loses
+    		$.post( "/resultUpdate", { code : 1, user1 : playerName, user2 : opponentName });
+    	}
+		
+    }
   }
 
   // draw?
@@ -473,6 +486,7 @@ function updateStatus()
     status = 'Game over, drawn position';
     $("#game-result-p").text(status);
     $("#resultsModal").modal();
+    $.post( "/resultUpdate", { code : 0, user1 : playerName, user2 : opponentName });
   }
 
   // game still on

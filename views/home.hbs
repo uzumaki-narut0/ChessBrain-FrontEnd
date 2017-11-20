@@ -138,21 +138,25 @@ $("#creategame-btn").on('click', function(){
 
 $("#joingame-btn").on("click", function(){
   var uniquekey = prompt("Unique key of the game?");
-  $.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
-    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/black';
-  });
+  if(uniquekey)
+  {
+  	$.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
+	    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/black';
+	  });	
+  }
+  
 });
 
-$("castle-btn").on('click', function(){
+$("#castle-btn").on('click', function(){
 	$.get('/' + "{{userDetails.username}}" + '/home', function(data){
     window.location = '/' + "{{userDetails.username}}" + '/home';
   });
 });
 
-$("logout-btn").on('click', function(){
+$("#logout-btn").on('click', function(){
 	//destroy session then redirect to start page
-	$.get('https://chess-brain.herokuapp.com', function(data){
-    window.location = 'https://chess-brain.herokuapp.com';
+	$.get('/', function(data){
+    window.location = '/';
   });
 
 });
