@@ -1,14 +1,15 @@
 version: "2"
 services:
-  app:
+  web:
     container_name: app
     restart: always
     build: .
     ports:
       - "3000:3000"
     links:
-      - mongo
-  mongo:
+      - db
+    command: npm start
+  db:
     container_name: mongo
     image: mongo
     volumes:

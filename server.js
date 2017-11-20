@@ -57,7 +57,7 @@ var Stats = mongoose.model('userStats', statsSchemaObj);
 //     	}
 //     else console.log('mongo connected');
 // });
-mongoose.connect('mongodb://localhost:27017', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true });
 
 
 
