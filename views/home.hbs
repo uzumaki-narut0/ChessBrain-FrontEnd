@@ -36,8 +36,6 @@
 							<i class="fa fa-handshake-o" aria-hidden="true"></i>
 							Offer Draw
 							</span><br>
-							<!-- <img src="img/clock.png" height="128px" width="128px"/> -->
-							<!-- <img height="128px" width="128px" src="https://lichess1.org/assets/images/learn/spinning-blades.svg"> -->
 							</li>
 							<li>
 							<span class="label label-danger">
@@ -59,9 +57,6 @@
 		</div>
 		<div id="chessWrapper" class="col-md-4">
 			<div id="profile-header" class="row">
-		<!-- 	<div class="col-md-1">
-			</div> -->
-
 			<div id="heading" class="col-md-12">
 				<i  class="fa fa-toggle-off fa" aria-hidden="true"></i>
 				PROFILE
@@ -131,6 +126,8 @@
 //event handlers for side-li buttons
 $("#creategame-btn").on('click', function(){
   var uniquekey = Math.random().toString(36).slice(2);
+  //make a get request to flask server which would return a fen layout
+  //send this fen layout to server along with other details
   $.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/white', function(data){
     window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/white';
   });
