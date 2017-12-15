@@ -48,16 +48,16 @@ var statsSchemaObj = new statsSchema({
 var Signup = mongoose.model('User', signupSchemaObj);
 var Stats = mongoose.model('userStats', statsSchemaObj);
 
-//establishing connection
-// mongoose.connect(process.env.MONGODB_URI, function (error) {
-//     if (error) 
-//     	{
-//     		console.error(error);
-//     		console.log("error aa rha hai!!");
-//     	}
-//     else console.log('mongo connected');
-// });
-mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true });
+establishing connection
+mongoose.connect(process.env.MONGODB_URI, function (error) {
+    if (error) 
+    	{
+    		console.error(error);
+    		console.log("error aa rha hai!!");
+    	}
+    else console.log('mongo connected');
+});
+// mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true });
 
 
 
@@ -190,7 +190,7 @@ app.post('/:userid/home',function(req,res){
 	Signup.find(req.body, function(err, userDetails){
 		if(userDetails.length == 0){
       // res.sendStatus(200);
-			res.redirect("/authenticateUser.html");
+			res.redirect(304,"/authenticateUser.html");
 		}	
 		else{
       req.session.username = req.body.username; //storing into session
@@ -204,16 +204,18 @@ app.post('/:userid/home',function(req,res){
 	});
 })
 
-app.get('/:userid/:id/:playas',function(req,res){
+app.get('/:userid/:id/:playas/:fen',function(req,res){
   // console.log(req.params);
-
+  console.log(req.session.username);
+  fen_layout = req.params.fen.replace(/_/g,"/");
+  console.log(fen_layout);
   if(req.params.userid == req.session.username)
   {
       res.render('play', {id: req.params.id,
       playas: req.params.playas,
       userDetails : {
           username : req.session.username,
-          gamestate : 'start'
+          gamestate : fen_layout || 'start'
         }
       });  
      
@@ -278,5 +280,5 @@ app.post('/resultUpdate', function(req, res){
 });
 
 http.listen(portnumber, function () {
-  console.log('Example app listening on port!'+portnumber);
+  console.log('Chessbrain server is listening on port!'+portnumber);
 })

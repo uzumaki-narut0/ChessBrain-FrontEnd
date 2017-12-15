@@ -1,3 +1,30 @@
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Upload a Snapshot</h4>
+        </div>
+        <form enctype="multipart/form-data" id="game-form" method="post" action="http://90d085a9.ngrok.io">
+	        <div class="modal-body">
+	        	<input id="file" type="file" name='file'>
+	        	<input type="hidden" name="user_name" id="user_name_form">
+	        	<input type="hidden" name="color" id="user_color_form">
+	        	<input type="hidden" name="uniquekey" id="unique_key_form">
+	        </div>
+	        <div class="modal-footer">
+	          <input id="submit-modal" class="btn btn-default" type="submit" value="submit">
+	        </div>
+	    </form>
+      </div>
+      
+    </div>
+  </div>
+<!-- Modal Ends -->
+
 <div class="container-fluid">
 	<div class="row" style="height: 100%">
 		<div style="background-color: rgb(40, 50, 78);height: 100%;" class="col-md-1">
@@ -9,7 +36,8 @@
 				<li id="castle-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/castle.svg">
 					Castle
 				</li>
-				<li id="creategame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">Create
+				<li id="creategame-btn" class="sidebar-li" data-toggle="modal" data-target="#myModal"><img src="https://lichess1.org/assets/images/learn/battle-gear.svg">
+					Create
 				</li>
 				<li id="joingame-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/guards.svg">Join</li>
 				<li id="logout-btn" class="sidebar-li"><img src="https://lichess1.org/assets/images/learn/winged-sword.svg">Logout</li>
@@ -123,21 +151,18 @@
     var board1 = ChessBoard('board1', 'start');
 </script>
 <script type="text/javascript">
-//event handlers for side-li buttons
-$("#creategame-btn").on('click', function(){
-  var uniquekey = Math.random().toString(36).slice(2);
-  //make a get request to flask server which would return a fen layout
-  //send this fen layout to server along with other details
-  $.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/white', function(data){
-    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/white';
-  });
-});
+	var uniquekey = Math.random().toString(36).slice(2);
+	$("#user_name_form").attr('value', "{{userDetails.username}}");
+	$("#user_color_form").attr('value', "white");
+	$("#unique_key_form").attr('value', uniquekey);
+	console.log($("#user_name_form").attr('value'));
 
 $("#joingame-btn").on("click", function(){
   var uniquekey = prompt("Unique key of the game?");
-  if(uniquekey)
+  var fen = prompt("fen");
+  if(uniquekey && fen)
   {
-  	$.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/black', function(data){
+  	$.get('/' + "{{userDetails.username}}" + '/' + uniquekey + '/black/' + fen, function(data){
 	    window.location = '/' + "{{userDetails.username}}" + '/' + uniquekey + '/black';
 	  });	
   }
