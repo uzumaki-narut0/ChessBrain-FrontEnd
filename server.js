@@ -48,7 +48,7 @@ var statsSchemaObj = new statsSchema({
 var Signup = mongoose.model('User', signupSchemaObj);
 var Stats = mongoose.model('userStats', statsSchemaObj);
 
-establishing connection
+// establishing connection
 mongoose.connect(process.env.MONGODB_URI, function (error) {
     if (error) 
     	{
