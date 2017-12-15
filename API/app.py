@@ -1,16 +1,103 @@
-from flask import Flask
-from flask_restful import Resource, Api
 import os
+import glob
+from flask import Flask, request, redirect, url_for, render_template, jsonify
+from flask_cors import CORS, cross_origin
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
+import chess_board_recognizer
+import uuid
+import tester
+import json
+
+if not os.path.exists('user_chessboards'):
+    os.makedirs('user_chessboards')
+if not os.path.exists('user_tiles'):
+    os.makedirs('user_tiles')
+
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+UPLOAD_FOLDER = 'user_chessboards'
+TILES_OUTPUT_FOLDER = 'user_tiles'
+INDEX = 'index.html'
+BASE_URL = 'https://94ce710f.ngrok.io'
 
 app = Flask(__name__)
 CORS(app)
-api = Api(app)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['TILES_OUTPUT_FOLDER'] = TILES_OUTPUT_FOLDER
+app.config['INDEX'] = INDEX
 
-class ChessBrain(Resource):
-    def get(self):
-        return {'fen_layout': 'start'}
+symbol = {'black_bishop': 'b', 'black_king': 'k', 'black_knight': 'n', 'black_pawn': 'p', 'black_queen': 'q', 'black_rook': 'r', 'blank': 'e', \
+'white_bishop': 'B', 'white_king': 'K', 'white_knight': 'N', 'white_pawn': 'P', 'white_queen': 'Q', 'white_rook': 'R'}
 
-api.add_resource(ChessBrain, '/')
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def createFEN(test_result):
+    FEN = ''
+    rows = 8
+    while rows > 0:
+        rows -= 1
+        st = rows
+        en = 63 - (7 - rows)
+        blanks = 0
+        for idx in range(st, en + 1, 8):
+            if (test_result[idx] == 'blank'):
+                blanks += 1
+            else:
+                if (blanks > 0):
+                    FEN += str(blanks)
+                    blanks = 0
+                FEN += symbol[test_result[idx]]
+        if (blanks > 0):
+            FEN += str(blanks)
+            blanks = 0
+        if rows != 0:
+            FEN += '_'
+    return FEN
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
+@app.route('/', methods=['GET', 'POST'])
+@cross_origin()
+def upload_file():
+
+    if request.method == 'POST':
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No image part')
+            return redirect(request.url)
+
+        file = request.files['file']
+
+        if file.filename == '':
+            flash('No image selected')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+
+            random_file_name = str(uuid.uuid4())
+            file.filename = random_file_name + '.' + file.filename.rsplit('.', 1)[1].lower() # Some unique file name
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            chess_board_recognizer.generateTileset(file.filename, app.config['UPLOAD_FOLDER'], app.config['TILES_OUTPUT_FOLDER'])
+            tiles_array = []
+            tiles_location = TILES_OUTPUT_FOLDER + '/squares_' + random_file_name
+            path = os.path.join(tiles_location, '*g')  # For finding all .jpeg, .jpg, .png files
+            tiles = sorted(glob.glob(path))
+            for tile in tiles:
+                tiles_array.append(tile)
+            test_result = tester.testTiles(tiles_array)
+            FEN = createFEN(test_result)
+
+            URL = BASE_URL + '/' + request.form['user_name'] + '/' + request.form['uniquekey'] + '/' + request.form['color'] + '/' + FEN
+            print(URL)
+            return redirect(URL, code=302)
 
 port = int(os.environ.get("PORT", 5000))
 app.run(host='0.0.0.0', port=port)

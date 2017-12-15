@@ -1,3 +1,8 @@
-Flask
-flask_restful
-flask_cors
+flask
+tensorflow
+Pillow
+IPython
+scipy
+opencv-python
+matplotlib
+flask-cors

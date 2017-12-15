@@ -49,15 +49,15 @@ var Signup = mongoose.model('User', signupSchemaObj);
 var Stats = mongoose.model('userStats', statsSchemaObj);
 
 // establishing connection
-mongoose.connect(process.env.MONGODB_URI, function (error) {
-    if (error) 
-    	{
-    		console.error(error);
-    		console.log("error aa rha hai!!");
-    	}
-    else console.log('mongo connected');
-});
-// mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true });
+// mongoose.connect(process.env.MONGODB_URI, function (error) {
+//     if (error) 
+//     	{
+//     		console.error(error);
+//     		console.log("error aa rha hai!!");
+//     	}
+//     else console.log('mongo connected');
+// });
+mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true });
 
 
 
